@@ -902,40 +902,40 @@ Redis 是非关系型数据库(NoSQL),使用内存存储,并能存储 5 种不�
 
   ```js
     //PX 选项
-    redis 127.0.0.1:6379> SET key-with-pexpire-time "moto" PX 123321
+    redis <127.0.0.1:6379> SET key-with-pexpire-time "moto" PX 123321
     OK
 
-    redis 127.0.0.1:6379> GET key-with-pexpire-time
+    redis <127.0.0.1:6379> GET key-with-pexpire-time
     "moto"
 
-    redis 127.0.0.1:6379> PTTL key-with-pexpire-time
+    redis <127.0.0.1:6379> PTTL key-with-pexpire-time
     (integer) 111939
     //NX 选项
-    redis 127.0.0.1:6379> SET not-exists-key "value" NX
+    redis <127.0.0.1:6379> SET not-exists-key "value" NX
     OK      # 键不存在，设置成功
 
-    redis 127.0.0.1:6379> GET not-exists-key
+    redis <127.0.0.1:6379> GET not-exists-key
     "value"
 
-    redis 127.0.0.1:6379> SET not-exists-key "new-value" NX
+    redis <127.0.0.1:6379> SET not-exists-key "new-value" NX
     (nil)   # 键已经存在，设置失败
 
-    redis 127.0.0.1:6379> GEt not-exists-key
+    redis <127.0.0.1:6379> GEt not-exists-key
     "value" # 维持原值不变
     //XX 选项
-    redis 127.0.0.1:6379> EXISTS exists-key
+    redis <127.0.0.1:6379> EXISTS exists-key
     (integer) 0
 
-    redis 127.0.0.1:6379> SET exists-key "value" XX
+    redis <127.0.0.1:6379> SET exists-key "value" XX
     (nil)   # 因为键不存在，设置失败
 
-    redis 127.0.0.1:6379> SET exists-key "value"
+    redis <127.0.0.1:6379> SET exists-key "value"
     OK      # 先给键设置一个值
 
-    redis 127.0.0.1:6379> SET exists-key "new-value" XX
+    redis <127.0.0.1:6379> SET exists-key "new-value" XX
     OK      # 设置新值成功
 
-    redis 127.0.0.1:6379> GET exists-key
+    redis <127.0.0.1:6379> GET exists-key
     "new-value"
   ```
 
