@@ -1,9 +1,5 @@
 # ubuntu 脱坑 & 日常
 
-[TOC]
-
----
-
 ## 系统安装
 
 - win10 下空出分区，以便 ubuntu 安装
@@ -308,7 +304,7 @@ prototype 属性指向被 构造函数 创建的 函数(**`function`**) 的原�
     {{#unless hobby}}
     <p>I have hobby</p>
     {{else}}
-    <p>I don't have hobby</p>
+    <p>I don't have hobby'</p>
     {{/unless}}
     //输出
     <p>Hello, my name is John Doe.</p>
