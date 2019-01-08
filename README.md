@@ -95,87 +95,89 @@
   - 控制 state 形式(选中||未选中场景):
     ```js
       <FormItem {...checkbox} label="具体风险描述">
-                {getFieldDecorator("descriptionInForceMajeure", {
-                  rules: [
-                    {
-                      required: false,
-                      message: "请选择/填写描述"
-                    }
-                  ]
-                })(
-                  <CheckboxGroup
-                    style={{ paddingLeft: "1rem" }}
-                    options={checkboxOptions1}
-                    onChange={this.checkboxChang1}
-                  />
-                )}
-                { this.state.descriptionInForceMajeure ? getFieldDecorator("descriptionInForceMajeureInput", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "请选择/填写描述"
-                    }
-                  ]
-                })(<Input />):null}
-              </FormItem>
-              <FormItem {...checkbox} label="风险规避措施">...
+        {getFieldDecorator("descriptionInForceMajeure", {
+          rules: [
+            {
+              required: false,
+              message: "请选择/填写描述"
+            }
+          ]
+        })(
+          <CheckboxGroup
+            style={{ paddingLeft: "1rem" }}
+            options={checkboxOptions1}
+            onChange={this.checkboxChang1}
+          />
+        )}
+        { this.state.descriptionInForceMajeure ? getFieldDecorator("descriptionInForceMajeureInput", {
+          rules: [
+            {
+              required: true,
+              message: "请选择/填写描述"
+            }
+          ]
+        })(<Input />):null}
+      </FormItem>
+    <FormItem {...checkbox} label="风险规避措施">...
     ```
-    注意,在 `setFieldsValue()`里要对应每个注册表名 `name` 相同 ,在不同周期,注意`setState`,注意`setFieldsValue` 本质是调用外层`wrapper` 的 `setState`
+  注意,在 `setFieldsValue()`里要对应每个注册表名 `name` 相同 ,在不同周期,注意`setState`,注意`setFieldsValue` 本质是调用外层`wrapper` 的 `setState`
 
 - antd 里 `Modal`组件下,默认`zIndex`属性为 1000,不设置的话,默认关闭是打开顺序.
   在里面嵌套组件时,需要特别注意(大坑!!!)
 
   ```js
-  //options设置!!
-  const ModalOpits2 = {
-    title: "Schedule details",
-    footer: null,
-    centered: true,
-    width: "30rem",
-    // zIndex: 11111,
-    visible: this.state.detvisible,
-    onCancel: this.setDetailOff,
-    mask: false,
-    destroyOnClose: true
-  };
-  //嵌套
-  <Modal {...ModalOpits2}>
-    <Form onSubmit={this.handleSubmit}>
-      <FormItem {...formItemLayout} label="Where Dates ?">
-        <span className="ant-form-text">{this.state.showNums}</span>
-      </FormItem>
-      <FormItem label="SelectBadgeType" {...formItemLayout}>
-        {getFieldDecorator("badgeType", {
-          initialValue: "success",
-          rules: [{ required: false, message: "请选择日程类型" }]
-        })(
-          <Select
-            // disabled={this.state.showText}
-            onChange={this.handleSelectChange}
-          >
-            {options}
-          </Select>
-        )}
-      </FormItem>
-      <FormItem label="Schedule details" {...formItemLayout}>
-        {getFieldDecorator("Details", {
-          initialValue: this.state.nowtextcont,
-          rules: [{ required: true, message: "请填写详情内容" }]
-        })(
-          <TextArea
-            disabled={this.state.showText}
-            autosize={{ minRows: 2, maxRows: 6 }}
-          />
-        )}
-      </FormItem>
-      <FormItem wrapperCol={{ span: 12, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </FormItem>
-    </Form>
-  </Modal>;
+    //options设置!!
+    const ModalOpits2 = {
+      title: "Schedule details",
+      footer: null,
+      centered: true,
+      width: "30rem",
+      // zIndex: 11111,
+      visible: this.state.detvisible,
+      onCancel: this.setDetailOff,
+      mask: false,
+      destroyOnClose: true
+    };
+    //嵌套
+    <Modal {...ModalOpits2}>
+      <Form onSubmit={this.handleSubmit}>
+        <FormItem {...formItemLayout} label="Where Dates ?">
+          <span className="ant-form-text">{this.state.showNums}</span>
+        </FormItem>
+        <FormItem label="SelectBadgeType" {...formItemLayout}>
+          {getFieldDecorator("badgeType", {
+            initialValue: "success",
+            rules: [{ required: false, message: "请选择日程类型" }]
+          })(
+            <Select
+              // disabled={this.state.showText}
+              onChange={this.handleSelectChange}
+            >
+              {options}
+            </Select>
+          )}
+        </FormItem>
+        <FormItem label="Schedule details" {...formItemLayout}>
+          {getFieldDecorator("Details", {
+            initialValue: this.state.nowtextcont,
+            rules: [{ required: true, message: "请填写详情内容" }]
+          })(
+            <TextArea
+              disabled={this.state.showText}
+              autosize={{ minRows: 2, maxRows: 6 }}
+            />
+          )}
+        </FormItem>
+        <FormItem wrapperCol={{ span: 12, offset: 8 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </FormItem>
+      </Form>
+    </Modal>;
   ```
+
+- antd [引入Map组件](https://github.com/ElemeFE/react-amap)时,可以引入原生Map对象，使用其[方法](https://lbs.amap.com/api/javascript-api/reference/map)具体[配置](https://elemefe.github.io/react-amap/components/map#%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7)
 
 ## 构造函数&原型对象
 
