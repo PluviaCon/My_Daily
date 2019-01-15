@@ -287,8 +287,7 @@ prototype 属性指向被 构造函数 创建的 函数(**`function`**) 的原�
   #C:\Users\用户\AppData\Local\.meteor\meteor.bat
 ```
 
-然后去path配置变量
-最后启动meteor
+然后去path配置变量,最后启动meteor
 
 ### RocketChat [API](https://rocket.chat/docs/developer-guides/rest-api/)
 
