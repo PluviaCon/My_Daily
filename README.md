@@ -278,6 +278,18 @@ prototype 属性指向被 构造函数 创建的 函数(**`function`**) 的原�
 
 ## Meteor
 
+在Ubuntu或是Win环境安装时,按照[官网](https://www.meteor.com/install)操作即可.
+注意win环境配置时,先安装[Chocolatey](https://chocolatey.org/install),然后根据`meteor npm i`,提示报错,安装`node-gyp`(应该是这个,具体看报错,全局安装),然后,配置环境变量
+
+```shell
+  #先查看meteor路径
+  where.exe meteor
+  #C:\Users\用户\AppData\Local\.meteor\meteor.bat
+```
+
+然后去path配置变量
+最后启动meteor
+
 ### RocketChat [API](https://rocket.chat/docs/developer-guides/rest-api/)
 
 一个开源、开放、功能强大、基于 Meteor 和 MongoDB 的 Slack 替代软件....(~~聊天的~~)
