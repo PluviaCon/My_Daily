@@ -68,7 +68,7 @@
 - `curl` 命令， 网络工具，[基本用法](https://www.cnblogs.com/linjiqin/p/5484910.html)
 - `npm`
 - `ip addr`
-- `source /etc/bashrc`
+- `source /etc/bashrc` `source`用于执行`shell`文件,其他[方法和区别](https://blog.csdn.net/u012336923/article/details/50474692)
 
 ### 软件
 
