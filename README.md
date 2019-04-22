@@ -14,7 +14,7 @@
       - [**外部命令&内部命令**](#外部命令内部命令)
       - [**环境变量**](#环境变量)
       - [**文件权限**](#文件权限)
-    - [shell基础](#shell基础)
+    - [shell 基础](#shell-基础)
       - [**重新定向输入和输出**](#重新定向输入和输出)
       - [**结构化命令**](#结构化命令)
   - [构造函数&原型对象](#构造函数原型对象)
@@ -54,6 +54,7 @@
       - [字符串](#字符串)
   - [Python](#python)
     - [安装库及常用框架](#安装库及常用框架)
+  - [Odoo](#odoo)
   - [参考资料](#参考资料)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
@@ -102,7 +103,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
   > 先拉取线上代码,判断是否存在冲突,有则存栈,然后在拉取代码,然后出栈.
   > 通过 git status 查看仓库的状态
   > 确认提交分支正确,然后备注本次修改内容,然后提交(push)
-  > 若遇到 elline 语法问题 ,尝试git commit --no-verify -m "修改"
+  > 若遇到 elline 语法问题 ,尝试 git commit --no-verify -m "修改"
 
 - 启动 java 时注意端口有无被占用,[查看进程](https://blog.csdn.net/hongweideng/article/details/78424866)
 - ESlint 语法规则问题，[官网](https://eslint.org/)大多有解释,补充：
@@ -123,9 +124,9 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 - `属性访问注意` 当属性名是循环或是获取时,多为字符串类型,用 **`.`** 访问为`undefined`. 使用`[]`[访问](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Property_Accessors),可以取到
 
   ```js
-  if (typeof content[key] == "string" && content[key].includes("其他")) {
-    content[key] = content[key].split(",");
-    self.setState({ [key]: true });
+  if (typeof content[key] == 'string' && content[key].includes('其他')) {
+    content[key] = content[key].split(',')
+    self.setState({ [key]: true })
   }
   ```
 
@@ -170,45 +171,39 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
   ```js
   //options设置!!
   const ModalOpits2 = {
-    title: "Schedule details",
+    title: 'Schedule details',
     footer: null,
     centered: true,
-    width: "30rem",
+    width: '30rem',
     // zIndex: 11111,
     visible: this.state.detvisible,
     onCancel: this.setDetailOff,
     mask: false,
     destroyOnClose: true
-  };
+  }
   //嵌套
-  <Modal {...ModalOpits2}>
+  ;<Modal {...ModalOpits2}>
     <Form onSubmit={this.handleSubmit}>
       <FormItem {...formItemLayout} label="Where Dates ?">
         <span className="ant-form-text">{this.state.showNums}</span>
       </FormItem>
       <FormItem label="SelectBadgeType" {...formItemLayout}>
-        {getFieldDecorator("badgeType", {
-          initialValue: "success",
-          rules: [{ required: false, message: "请选择日程类型" }]
+        {getFieldDecorator('badgeType', {
+          initialValue: 'success',
+          rules: [{ required: false, message: '请选择日程类型' }]
         })(
           <Select
             // disabled={this.state.showText}
-            onChange={this.handleSelectChange}
-          >
+            onChange={this.handleSelectChange}>
             {options}
           </Select>
         )}
       </FormItem>
       <FormItem label="Schedule details" {...formItemLayout}>
-        {getFieldDecorator("Details", {
+        {getFieldDecorator('Details', {
           initialValue: this.state.nowtextcont,
-          rules: [{ required: true, message: "请填写详情内容" }]
-        })(
-          <TextArea
-            disabled={this.state.showText}
-            autosize={{ minRows: 2, maxRows: 6 }}
-          />
-        )}
+          rules: [{ required: true, message: '请填写详情内容' }]
+        })(<TextArea disabled={this.state.showText} autosize={{ minRows: 2, maxRows: 6 }} />)}
       </FormItem>
       <FormItem wrapperCol={{ span: 12, offset: 8 }}>
         <Button type="primary" htmlType="submit">
@@ -216,7 +211,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
         </Button>
       </FormItem>
     </Form>
-  </Modal>;
+  </Modal>
   ```
 
 - antd [引入 Map 组件](https://github.com/ElemeFE/react-amap)时,可以引入原生 Map 对象，使用其[方法](https://lbs.amap.com/api/javascript-api/reference/map)具体[配置](https://elemefe.github.io/react-amap/components/map#%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7)
@@ -230,10 +225,10 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 - `ip addr`
 - `sudo` 命令，权限高 (**_Super user do_**)
 - `ls` 当前目录下所有文件夹, `ls -l & ls -a` (**_详细文件信息和全部文件信息包括隐藏_**)
-- `ctrl + : ` 查看剪切板信息(快捷键)
+- `ctrl + :` 查看剪切板信息(快捷键)
 - `cd & rm & mkdir & cp` (**_进入目录 删除文件-f 表示强制 创建目录 复制文件_**)
 - `find` (**_查找文件， /表示查找的起始目录_**)
-- `tar & dpkg` (`tar -zxvf `解压文件名 -C 要复制到的文件目录 & dpkg -i .deb 文件 一般用于安装)
+- `tar & dpkg` (`tar -zxvf`解压文件名 -C 要复制到的文件目录 & dpkg -i .deb 文件 一般用于安装)
 - `source /etc/bashrc` `source`用于执行`shell`文件,其他[方法和区别](https://blog.csdn.net/u012336923/article/details/50474692)
 - `netstat -ano|findstr "3000"` && `Tskill 1796` win 下的 cmd 查看端口命令
 - `apt` 命令， 安装包管理工具，apt-get 的缩写(**_Advanced Packaging Tool_**),
@@ -245,9 +240,9 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 - `df -h` 硬盘
 - `cat /proc/cpuinfo` 查看核信息
 - `cat /etc/redhat-release` 查看版本信息
-- `cat /etc/sysconfig/network-scripts/ifcfg-ens ...` 查看网卡信息 , `service network restart` 重启网络 , `/etc/resolv.conf` 查看DNS ,`netstat -rn` 查看路由
-  注意,如果ping 某一个网址或ip时不通,但是ping本地网络可以,不是网络问题,是ping的端口被禁止了.测试:
-  `wget www.baidu.com && cat index.html`,如果可以下载,就是ping端口被禁止
+- `cat /etc/sysconfig/network-scripts/ifcfg-ens ...` 查看网卡信息 , `service network restart` 重启网络 , `/etc/resolv.conf` 查看 DNS ,`netstat -rn` 查看路由
+  注意,如果 ping 某一个网址或 ip 时不通,但是 ping 本地网络可以,不是网络问题,是 ping 的端口被禁止了.测试:
+  `wget www.baidu.com && cat index.html`,如果可以下载,就是 ping 端口被禁止
 
 ### 系统类
 
@@ -256,56 +251,55 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 `ps -ef`查看详细的进程信息,具体内容 (docker ps -a)
 
 - UID:启动这些进程的用户.
-- PID:进程的进程ID.
+- PID:进程的进程 ID.
 - PPID:父进程的进程号(如果该进程是由另一个进程启动的)
-- C:进程生命周期中的CPU利用率.
+- C:进程生命周期中的 CPU 利用率.
 - STIME:进程启动时的系统时间.
 - TTY:进程启动时的终端设备.
-- TIME:运行进程需要的累计CPU时间.
+- TIME:运行进程需要的累计 CPU 时间.
 - CMD:启动的程序名称.
 
 `详细参数`
 
- | 参数 | 描述                                                    |
- | ---- | ------------------------------------------------------- |
- | -A   | 显示所有进程                                            |
- | -N   | 显示与指定参数不符的所有进程                            |
- | -a   | 显示除控制进程(session leader )和无终端进程外的所有进程 |
- | -d   | 显示除控制进程外的所有进程                              |
- | -e   | 显示所有进程                                            |
- | -C   | cmdlist 显示包含在 cmdlist 列表中的进程                 |
- | -G   | grplist 显示组ID在 grplist 列表中的进程                 |
- | -U   | userlist 显示属主的用户ID在 userlist 列表中的进程       |
- | -g   | grplist 显示会话或组ID在 grplist 列表中的进程           |
- | -p   | pidlist 显示PID在 pidlist 列表中的进程                  |
- | -s   | sesslist                                                |
- | -t   | ttylist 显示终端ID在 ttylist 列表中的进程               |
- | -u   | userlist 显示有效用户ID在 userlist 列表中的进程         |
- | -F   | 显示更多额外输出(相对 -f 参数而言)                      |
- | -O   | format 显示默认的输出列以及 format 列表指定的特定列     |
- | -M   | 显示进程的安全信息                                      |
- | -c   | 显示进程的额外调度器信息                                |
- | -f   | 显示完整格式的输出                                      |
- | -j   | 显示任务信息                                            |
- | -l   | 显示长列表                                              |
- | -o   | format 仅显示由 format 指定的列                         |
- | -y   | 不要显示进程标记(process flag,表明进程状态的标记)       |
- | -Z   | 显示安全标签(security context) 1 信息                   |
- | -H   | 用层级格式来显示进程(树状,用来显示父进程)               |
- | -n   | namelist 定义了 WCHAN 列显示的值                        |
- | -w   | 采用宽输出模式,不限宽度显示                             |
- | -L   | 显示进程中的线程                                        |
- | -V   | 显示 ps 命令的版本号                                    |
+| 参数 | 描述                                                    |
+| ---- | ------------------------------------------------------- |
+| -A   | 显示所有进程                                            |
+| -N   | 显示与指定参数不符的所有进程                            |
+| -a   | 显示除控制进程(session leader )和无终端进程外的所有进程 |
+| -d   | 显示除控制进程外的所有进程                              |
+| -e   | 显示所有进程                                            |
+| -C   | cmdlist 显示包含在 cmdlist 列表中的进程                 |
+| -G   | grplist 显示组 ID 在 grplist 列表中的进程               |
+| -U   | userlist 显示属主的用户 ID 在 userlist 列表中的进程     |
+| -g   | grplist 显示会话或组 ID 在 grplist 列表中的进程         |
+| -p   | pidlist 显示 PID 在 pidlist 列表中的进程                |
+| -s   | sesslist                                                |
+| -t   | ttylist 显示终端 ID 在 ttylist 列表中的进程             |
+| -u   | userlist 显示有效用户 ID 在 userlist 列表中的进程       |
+| -F   | 显示更多额外输出(相对 -f 参数而言)                      |
+| -O   | format 显示默认的输出列以及 format 列表指定的特定列     |
+| -M   | 显示进程的安全信息                                      |
+| -c   | 显示进程的额外调度器信息                                |
+| -f   | 显示完整格式的输出                                      |
+| -j   | 显示任务信息                                            |
+| -l   | 显示长列表                                              |
+| -o   | format 仅显示由 format 指定的列                         |
+| -y   | 不要显示进程标记(process flag,表明进程状态的标记)       |
+| -Z   | 显示安全标签(security context) 1 信息                   |
+| -H   | 用层级格式来显示进程(树状,用来显示父进程)               |
+| -n   | namelist 定义了 WCHAN 列显示的值                        |
+| -w   | 采用宽输出模式,不限宽度显示                             |
+| -L   | 显示进程中的线程                                        |
+| -V   | 显示 ps 命令的版本号                                    |
 
-
->top 命令跟 ps 命令相似,能够显示进程信息,但它是实时显示的
+> top 命令跟 ps 命令相似,能够显示进程信息,但它是实时显示的
 
 `top` 命令显示时,第一部分显示的是系统的概况:
 第一行显示了当前时间、系统的运行时间、登录的用户数以及系统的平均负载
 第二行显示了进程概要信息—— top 命令的输出中将进程叫作`任务(task)`:有多少进程处在
 运行、休眠、停止或是僵化状态(僵化状态是指进程完成了,但父进程没有响应)
-第三行显示了CPU的概要信息.  top 根据进程的属主(用户还是系统)和进程的状态(运行、
-空闲还是等待)将CPU利用率分成几类输出
+第三行显示了 CPU 的概要信息. top 根据进程的属主(用户还是系统)和进程的状态(运行、
+空闲还是等待)将 CPU 利用率分成几类输出
 紧跟其后的两行说明了系统内存的状态. 第一行说的是系统的物理内存:总共有多少内存,
 当前用了多少,还有多少空闲. 后一行说的是同样的信息,不过是针对系统交换空间(如果分配
 了的话)的状态而言的
@@ -313,7 +307,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 `grep` 命令提供搜索文件内容功能,参数常用有`-n` :行号 `-v` :反向搜索(不匹配的) `-c` :匹配个数
 `-e` :多个匹配,支持正则,或是用`egrep`,具体参数可以用`man grep`来查看
 
-`coproc` 命令,后台创建一个子shell,并在子shell运行这个命令.注意,生成子shell的成本不低,而且速度还慢
+`coproc` 命令,后台创建一个子 shell,并在子 shell 运行这个命令.注意,生成子 shell 的成本不低,而且速度还慢
 
 ```shell
   coproc sleep 10
@@ -325,23 +319,23 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 内建命令和非内建命令的操作方式大不相同
 
-**外部命令** 也叫文件系统命令,是存在于bash shell之外的程序. 它们并不是shell程序的一部分. 外部命令程序通常位于`/bin`、`/usr/bin`、`/sbin`或`/usr/sbin`中,`ps` 命令也是中外部命令
+**外部命令** 也叫文件系统命令,是存在于 bash shell 之外的程序. 它们并不是 shell 程序的一部分. 外部命令程序通常位于`/bin`、`/usr/bin`、`/sbin`或`/usr/sbin`中,`ps` 命令也是中外部命令
 
 当外部命令执行时,会创建出一个子进程. 这种操作被称为衍生(forking). 外部命令 ps 很方便显示出它的父进程以
 及自己所对应的衍生子进程
 
-**内建命令** 内建命令和外部命令的区别在于前者不需要使用子进程来执行. 它们已经和shell编译成了一
-体,作为shell工具的组成部分存在,不需要借助外部程序文件来运行
+**内建命令** 内建命令和外部命令的区别在于前者不需要使用子进程来执行. 它们已经和 shell 编译成了一
+体,作为 shell 工具的组成部分存在,不需要借助外部程序文件来运行
 
 #### **环境变量**
 
-`环境变量(environment variable)` 用来存储有关shell会话和工作环境的信息,也可以用来存储持久数据,以便程序或脚本可以很快访问,一般是路径.分为,`全局变量` 和 `局部变量`
+`环境变量(environment variable)` 用来存储有关 shell 会话和工作环境的信息,也可以用来存储持久数据,以便程序或脚本可以很快访问,一般是路径.分为,`全局变量` 和 `局部变量`
 
-**`全局环境变量`** 对于shell会话和所有生成的子shell都是可见的,局部变量对创建它们的shell可见,系统环境变量基本上都是使用全大写字母,以区别于普通用户的环境变量,用`env` 或是 `printenv` 查看
+**`全局环境变量`** 对于 shell 会话和所有生成的子 shell 都是可见的,局部变量对创建它们的 shell 可见,系统环境变量基本上都是使用全大写字母,以区别于普通用户的环境变量,用`env` 或是 `printenv` 查看
 
 **`局部环境变量`** 局部环境变量只能在定义它们的进程中可见,`set` 命令会显示为某个特定进程设置的所有环境变量,包括局部变量、全局变量以及用户定义变量
 
-设置变量,应注意全局变量和局部变量的命名区别,全局变量用大写字符,局部变量为小写.并且注意shell的层级,即是父shell或是子shell运行的变量
+设置变量,应注意全局变量和局部变量的命名区别,全局变量用大写字符,局部变量为小写.并且注意 shell 的层级,即是父 shell 或是子 shell 运行的变量
 
 ```shell
   echo $testname
@@ -364,17 +358,19 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
   exit
   echo $my_variable
 ```
-**`unset`** 命令用来删除环境变量,和修改变量一样,在子shell中删除全局变量后,你无法将效果反映到父shell中
 
-在启动文件或环境文件设置默认启动`bash shell` 的方式,登录Linux系统室,shell会在五个文件读取命令:
-- `/etc/profile` 系统上默认的bash shell的主启动文件
+**`unset`** 命令用来删除环境变量,和修改变量一样,在子 shell 中删除全局变量后,你无法将效果反映到父 shell 中
+
+在启动文件或环境文件设置默认启动`bash shell` 的方式,登录 Linux 系统室,shell 会在五个文件读取命令:
+
+- `/etc/profile` 系统上默认的 bash shell 的主启动文件
 - `$HOME/.bash_profile` 下面四个是针对每个用户执行的启动文件
 - `$HOME/.bashrc`
 - `$HOME/.bash_login`
 - `$HOME/.profile`
 
 环境变量持久化,最好是在`/etc/profile.d`目录中创建一个以`.sh`结尾的文件. 把所有新的或修改过的全局环境变
-量设置放在这个文件中.在大多数发行版中,存储个人用户永久性bash shell变量的地方是`$HOME/.bashrc`文件. 这一点适用于所有类型的shell进程. 但如果设置了` BASH_ENV` 变量,那么记住,除非它指向的是`$HOME/.bashrc`,否则你应该将非交互式shell的用户变量放在别的地方.
+量设置放在这个文件中.在大多数发行版中,存储个人用户永久性 bash shell 变量的地方是`$HOME/.bashrc`文件. 这一点适用于所有类型的 shell 进程. 但如果设置了`BASH_ENV` 变量,那么记住,除非它指向的是`$HOME/.bashrc`,否则你应该将非交互式 shell 的用户变量放在别的地方.
 
 #### **文件权限**
 
@@ -389,40 +385,41 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 第一个字段一般用于描述文件和目权限的编码, `-` 代表文件,`r` 代表可读写,`w` 代表可写入,`x` 代表可执行(一般用于目录):
 
-```-rw-rw-r-- ``` 就代表.从第二个字段开始,`rw-` 文件属主(用户)权限为可读写,`rw-` 代表属组成员的权限为可读写,`r--` 代表其他用户的权限为只可读
+`-rw-rw-r--` 就代表.从第二个字段开始,`rw-` 文件属主(用户)权限为可读写,`rw-` 代表属组成员的权限为可读写,`r--` 代表其他用户的权限为只可读
 
-**Linux文件权限码**
+**Linux 文件权限码**
 
-| 权限  | 二进制值 | 八进制值 | 描述             |
-| :---: | :------: | :------: | :--------------- |
-|  ---  |   000    |    0     | 没有任何权限     |
-|  --x  |   001    |    1     | 只有执行权限     |
-|  -w-  |   010    |    2     | 只有写入权限     |
-|  -wx  |   011    |    3     | 有写入和执行权限 |
-|  r--  |   100    |    4     | 只有读取权限     |
-|  r-x  |   101    |    5     | 有读取和执行权限 |
-|  rw-  |   110    |    6     | 有读取和写入权限 |
-|  rwx  |   111    |    7     | 有全部权限       |
+| 权限 | 二进制值 | 八进制值 | 描述             |
+| :--: | :------: | :------: | :--------------- |
+| ---  |   000    |    0     | 没有任何权限     |
+| --x  |   001    |    1     | 只有执行权限     |
+| -w-  |   010    |    2     | 只有写入权限     |
+| -wx  |   011    |    3     | 有写入和执行权限 |
+| r--  |   100    |    4     | 只有读取权限     |
+| r-x  |   101    |    5     | 有读取和执行权限 |
+| rw-  |   110    |    6     | 有读取和写入权限 |
+| rwx  |   111    |    7     | 有全部权限       |
 
 **修改权限**
 
 `chmod` 命令用来改变文件和目录的安全性设置,可以用八进制模式或符号模式修改
-`chmod options mode file`  `[ugoa...][[+-=][rwxXstugo...]`
+`chmod options mode file` `[ugoa...][[+-=][rwxXstugo...]`
 
 **改变所属关系**
 
 `chown` 命令用来改变文件的属主, `chgrp` 命令用来改变文件的默认属组
 
-### shell基础
+### shell 基础
+
 > #!/bin/bash
 
-shell脚本会处理第一行注释,`#` 号后的`!`会告诉shell用哪个shell运行脚本
+shell 脚本会处理第一行注释,`#` 号后的`!`会告诉 shell 用哪个 shell 运行脚本
 
-shell脚本中定义的变量会一直保持着它们的值,但在shell脚本结束时会被删除掉
+shell 脚本中定义的变量会一直保持着它们的值,但在 shell 脚本结束时会被删除掉
 
 #### **重新定向输入和输出**
 
-bash shell提供了几个操作符,可以将命令的输出重定向到另一个位置(比如文件). 重定向可以用于输入,也可以用于输出,可以将文件重定向到命令输入
+bash shell 提供了几个操作符,可以将命令的输出重定向到另一个位置(比如文件). 重定向可以用于输入,也可以用于输出,可以将文件重定向到命令输入
 
 **输出重定向**
 `>` 符号用于输出到文件,但是会覆盖之前重新定向的内容; `>>` 符号会追加数据
@@ -437,42 +434,40 @@ bash shell提供了几个操作符,可以将命令的输出重定向到另一个
 对逻辑流程控制,改变程序的执行顺序,一般是`if then` 或者是`case`
 
 **if-then**
-shell语法规定if后的命令会执行,如果状态码是`0`(成功),then部分就会执行,fi代表语句结束
+shell 语法规定 if 后的命令会执行,如果状态码是`0`(成功),then 部分就会执行,fi 代表语句结束
 
 `(())`命令允许你在比较过程中使用高级数学表达式
 `[[]]`命令提供了针对字符串比较的高级特性
-`case`命令将指定的变量与不同模式进行比较. 如果变量和模式是匹配的,那么shell会执行
+`case`命令将指定的变量与不同模式进行比较. 如果变量和模式是匹配的,那么 shell 会执行
 为该模式指定的命令. 可以通过竖线操作符在一行中分隔出多个模式模式. 星号会捕获所有与已
-知模式不匹配的值(swith类似)
+知模式不匹配的值(swith 类似)
 
 **for 命令**
-for 、 while 和 until 迭代命令.大部分使用for或while
+for 、 while 和 until 迭代命令.大部分使用 for 或 while
 
 从变量读取值时,可以结合命令获取的值赋予变量,然后循环,用`$()`包住命令或是用变量赋予
 
 **字段分隔符**
-是个坑,IFS ,叫作内部字段分隔符(internal field separator). 
-IFS 环境变量定义了bash shell用作字段分隔符的一系列字符. 默认情况下,bash shell会将下列字
+是个坑,IFS ,叫作内部字段分隔符(internal field separator).
+IFS 环境变量定义了 bash shell 用作字段分隔符的一系列字符. 默认情况下,bash shell 会将下列字
 符当作字段分隔符:
+
 - 空格
 - 制表符
 - 换行符
 
-如果bash shell在数据中看到了这些字符中的任意一个,它就会假定这表明了列表中一个新数
+如果 bash shell 在数据中看到了这些字符中的任意一个,它就会假定这表明了列表中一个新数
 据字段的开始. 在处理可能含有空格的数据(比如文件名)时,这会非常麻烦,就像你在上一个
 脚本示例中看到的.
 
 假定你要遍历一个文件中用冒号分隔的值(比如在
-/etc/passwd文件中)
-. 你要做的就是将 IFS 的值设为冒号. 
+/etc/passwd 文件中)
+. 你要做的就是将 IFS 的值设为冒号.
 IFS=:
-如果要指定多个 IFS 字符,只要将它们在赋值行串起来就行. 
-IFS=$'\n':;"
+如果要指定多个 IFS 字符,只要将它们在赋值行串起来就行.
+IFS=\$'\n':;"
 这个赋值会将换行符、冒号、分号和双引号作为字段分隔符. 如何使用 IFS 字符解析数据没
 有任何限制.
-
-
-
 
 ## 构造函数&原型对象
 
@@ -483,21 +478,21 @@ IFS=$'\n':;"
 属性始终指向创建当前对象的构造函数
 
 ```js
-var arr = [1, 2, 3];
-console.log(arr.constructor); //输出 function Array(){}
-var a = {};
-console.log(arr.constructor); //输出 function Object(){}
-var bool = false;
-console.log(bool.constructor); //输出 function Boolean(){}
-var name = "hello";
-console.log(name.constructor); //输出 function String(){}
-var sayName = function() {};
-console.log(sayName.constrctor); // 输出 function Function(){}
+var arr = [1, 2, 3]
+console.log(arr.constructor) //输出 function Array(){}
+var a = {}
+console.log(arr.constructor) //输出 function Object(){}
+var bool = false
+console.log(bool.constructor) //输出 function Boolean(){}
+var name = 'hello'
+console.log(name.constructor) //输出 function String(){}
+var sayName = function() {}
+console.log(sayName.constrctor) // 输出 function Function(){}
 
 //接下来通过构造函数创建instance
 function A() {}
-var a = new A();
-console.log(a.constructor); //输出 function A(){}
+var a = new A()
+console.log(a.constructor) //输出 function A(){}
 ```
 
 ### prototype **_属性_**
@@ -518,11 +513,11 @@ prototype 属性指向被 构造函数 创建的 函数(**`function`**) 的原�
   ```js
   class Point {
     constructor(x, y) {
-      this.x = x;
-      this.y = y;
+      this.x = x
+      this.y = y
     }
     toString() {
-      returu`(${this.x},${this.y})`;
+      returu`(${this.x},${this.y})`
     }
   }
   ```
@@ -533,65 +528,67 @@ prototype 属性指向被 构造函数 创建的 函数(**`function`**) 的原�
 
 javascript 变量是松散类型变量,意味着可以给变量赋值任意类型,可以分为 `基本类型` `引用类型` 两类
 
-- `基本类型 :`包括Undefined, Null, Boolean, Number和String五种基本数据类型
+- `基本类型 :`包括 Undefined, Null, Boolean, Number 和 String 五种基本数据类型
   当复制基本类型的值时会在变量对象上创建一个新值,然后把该值复制到为新变量分配的位置上,两个变量互相操作而不受影响
 
   ```js
-    let num1 = 5;let num2 = num1; num2++; console.log(num1,num2);
+  let num1 = 5
+  let num2 = num1
+  num2++
+  console.log(num1, num2)
   ```
 
 - `引用类型 :`保存在内存中的对象们，不能直接操作，只能通过保存在变量中的地址引用对其进行操作
   当一个变量向另一个变量中赋值引用类型的值时,同样会吧存储在变量对象中的值复制一份到新变量,但是这个值只是一个指针,而这个指针指向的是存储在堆中的一个对象.复制结束之后,两个变量实际上引用一个对象,因此改变一个变量,就会影响另一个变量
 
   ```js
-    tableBodys.splice(
-      tableBody.findIndex(value => {
-        return value[0].key == "oneTask";
-      }) + 1,
-      4
-    );
-    tableBodys.splice(
-      tableBody.findIndex(value => {
-        return value[0].key == "twoTask";
-      }) + 1,
-      5
-    );
-    var a = {name: "apple"};
-    var b = a;
-    a.name = "banana";
-    b.name
+  tableBodys.splice(
+    tableBody.findIndex(value => {
+      return value[0].key == 'oneTask'
+    }) + 1,
+    4
+  )
+  tableBodys.splice(
+    tableBody.findIndex(value => {
+      return value[0].key == 'twoTask'
+    }) + 1,
+    5
+  )
+  var a = { name: 'apple' }
+  var b = a
+  a.name = 'banana'
+  b.name
   ```
 
-- `解决方法 :`  因为传参的方法还是没有改变变量类型,所以妥善的做法是遍历这个对象(或数组)的值,重新复制一个
+- `解决方法 :` 因为传参的方法还是没有改变变量类型,所以妥善的做法是遍历这个对象(或数组)的值,重新复制一个
 
   ```js
-    let arr = [1,2,3]
-    let newarr = arr.slice(0)
+  let arr = [1, 2, 3]
+  let newarr = arr.slice(0)
 
-    function clone(obj) {  
-    var o;  
-    if (typeof obj == "object") {  
-        if (obj === null) {  
-            o = null;  
-        } else {  
-            if (obj instanceof Array) {  
-                o = [];  
-                for (var i = 0, len = obj.length; i < len; i++) {  
-                    o.push(clone(obj[i]));  
-                }  
-            } else {  
-                o = {};  
-                for (var j in obj) {  
-                    o[j] = clone(obj[j]);  
-                }  
-            }  
-        }  
-    } else {  
-        o = obj;  
-    }  
-    return o;  
+  function clone(obj) {
+    var o
+    if (typeof obj == 'object') {
+      if (obj === null) {
+        o = null
+      } else {
+        if (obj instanceof Array) {
+          o = []
+          for (var i = 0, len = obj.length; i < len; i++) {
+            o.push(clone(obj[i]))
+          }
+        } else {
+          o = {}
+          for (var j in obj) {
+            o[j] = clone(obj[j])
+          }
+        }
+      }
+    } else {
+      o = obj
     }
-
+    return o
+  }
   ```
 
 ## Meteor
@@ -624,12 +621,12 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 - `action()`路由匹配时触发,[详情](https://guide.meteor.com/routing.html#rendering-routes)
 
   ```js
-  FlowRouter.route("/lists/:_id", {
-    name: "Lists.show",
+  FlowRouter.route('/lists/:_id', {
+    name: 'Lists.show',
     action() {
-      BlazeLayout.render("App_body", { main: "Lists_show_page" });
+      BlazeLayout.render('App_body', { main: 'Lists_show_page' })
     }
-  });
+  })
   //访问“/lists/:_id(自定义)下，“App_body”组件下main属性
   ```
 
@@ -637,12 +634,12 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 
   ```js
   Template.myTemplate.events({
-    "click #id": function() {
-      FlowRouter.subsReady("myPost", function() {
+    'click #id': function() {
+      FlowRouter.subsReady('myPost', function() {
         // do something
-      });
+      })
     }
-  });
+  })
   ```
 
 ### [meteor 模板](https://segmentfault.com/a/1190000003781596),[解释](https://segmentfault.com/a/1190000003781596)
@@ -653,15 +650,15 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 - `Template.registerHelper` 定义所有模板都能用的 helper
 
   ```js
-  Template.registerHelper("log", () => {
-    console.log.apply(console, arguments);
-  });
-  Template.registerHelper("not", value => {
-    return !value;
-  });
-  Template.registerHelper("hasPermission", function(permission, scope) {
-    return hasPermission(permission, scope, atLeastOne);
-  });
+  Template.registerHelper('log', () => {
+    console.log.apply(console, arguments)
+  })
+  Template.registerHelper('not', value => {
+    return !value
+  })
+  Template.registerHelper('hasPermission', function(permission, scope) {
+    return hasPermission(permission, scope, atLeastOne)
+  })
   ```
 
 - `unless/else模板标签` [模板逻辑控制,条件](http://www.hangge.com/blog/cache/detail_1340.html)；判断数据是不是 `false`（或者是 `"undefined"` 或 `"null"` 或`""` 或`"0"`. 是 `false` 的话则走 `{{#unless}}`，否则走 `{{else}}` 分支
@@ -703,13 +700,13 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
   ```js
   //例子
   Template._autocompleteContainer.events({
-    "click .-autocomplete-item, click [data-autocomplete]"(e, t) {
-      t.data.onItemClick(this, e);
+    'click .-autocomplete-item, click [data-autocomplete]'(e, t) {
+      t.data.onItemClick(this, e)
     },
-    "mouseenter .-autocomplete-item"(e, t) {
-      t.data.onItemHover(this, e);
+    'mouseenter .-autocomplete-item'(e, t) {
+      t.data.onItemHover(this, e)
     }
-  });
+  })
   //key前半部分是事件名称,后半部分是css选择器
   //无论何时，选定元素上触发了监听的事件时，对应的事件处理函数就会被调用
   //参数为：DOM事件对象(Events)和模板实例(Template)
@@ -718,9 +715,9 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 - `Template.registerHelper()` (原版调用为: Blaze.registerHelper()) ,用于注册全局 [helpers](http://blazejs.org/guide/reusing-code.html#Global-Helpers)
 
   ```js
-  Blaze.registerHelper("pathFor", function(path, kw) {
-    return FlowRouter.path(path, kw.hash);
-  });
+  Blaze.registerHelper('pathFor', function(path, kw) {
+    return FlowRouter.path(path, kw.hash)
+  })
   ```
 
 - `Template instances` 获取模板实例,还可给模板实例附加属性,属性在模板响应式更新中保持,不会丢失
@@ -730,46 +727,46 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
   ```js
   Template.appInstall.helpers({
     isInstalling() {
-      return Template.instance().isInstalling.get();
+      return Template.instance().isInstalling.get()
     },
     appUrl() {
-      return Template.instance().appUrl.get();
+      return Template.instance().appUrl.get()
     }
-  });
+  })
   ```
 - `Template.myTemplate.onCreated()` 模板初始时调用方法,设定初始值,参数是要执行的方法
 
   ```js
   Template.readReceipts.onCreated(function readReceiptsOnCreated() {
-    this.loading = new ReactiveVar(false);
-    this.readReceipts = new ReactiveVar([]);
-  });
+    this.loading = new ReactiveVar(false)
+    this.readReceipts = new ReactiveVar([])
+  })
   //初始化值
   Template.hello.onCreated(function() {
-    console.log("产生模板..");
-    this.timer = null;
-    this.number = 0;
-  });
+    console.log('产生模板..')
+    this.timer = null
+    this.number = 0
+  })
   ```
 
 - `Template.myTemplate.onRendered` 模板被插入 DOM 时调用的方法,相似于`ReactDOM.render()`
 
   ```js
   Template.readReceipts.onRendered(function readReceiptsOnRendered() {
-    this.loading.set(true);
+    this.loading.set(true)
     Meteor.call(
-      "getReadReceipts",
+      'getReadReceipts',
       {
         messageId: this.data.messageId
       },
       (error, result) => {
         if (!error) {
-          this.readReceipts.set(result);
+          this.readReceipts.set(result)
         }
-        this.loading.set(false);
+        this.loading.set(false)
       }
-    );
-  });
+    )
+  })
   ```
 
   当前阶段可操作 DOM 元素,可以通过`find()`查找,参数是`css选择器`查找,或者`findall()`查询所有符合的元素,或使用`$()` 注意 JQ 选择下对象是 JQdom 对象,只能在此过程调用
@@ -778,20 +775,20 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 
   ```js
   Template.hello.onDestroyed(function() {
-    console.log("摧毀模板..");
+    console.log('摧毀模板..')
     // 清除 timer
-    clearInterval(this.timer);
-  });
+    clearInterval(this.timer)
+  })
   //OR 执行一些操作
   Template.rc_modal.onDestroyed(function() {
-    document.removeEventListener("keydown", modal.onKeydown);
-  });
+    document.removeEventListener('keydown', modal.onKeydown)
+  })
   Template.popover.onDestroyed(function() {
     if (this.data.onDestroyed) {
-      this.data.onDestroyed();
+      this.data.onDestroyed()
     }
-    $(window).off("resize", this.position);
-  });
+    $(window).off('resize', this.position)
+  })
   ```
 
 - [函数反应式编程](http://cw.hubwiz.com/card/c/55b87a7b3ad79a1b05dcc339/1/3/2/) `ReactiveVar` 类创建反应式数据(变量),触发变量既有响应式结果
@@ -800,38 +797,35 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
   - `set() get()` 获取或设置值
 
     ```js
-    const number = this.number.get();
-    this.number.set(number + 1);
+    const number = this.number.get()
+    this.number.set(number + 1)
     ```
 
   - 多数用在模板的
 
     ```js
     Template.appLogs.onCreated(function() {
-      const instance = this;
-      this.id = new ReactiveVar(FlowRouter.getParam("appId"));
-      this.ready = new ReactiveVar(false);
-      this.hasError = new ReactiveVar(false);
-      this.theError = new ReactiveVar("");
-      this.app = new ReactiveVar({});
-      this.logs = new ReactiveVar([]);
+      const instance = this
+      this.id = new ReactiveVar(FlowRouter.getParam('appId'))
+      this.ready = new ReactiveVar(false)
+      this.hasError = new ReactiveVar(false)
+      this.theError = new ReactiveVar('')
+      this.app = new ReactiveVar({})
+      this.logs = new ReactiveVar([])
 
-      const id = this.id.get();
-      Promise.all([
-        RocketChat.API.get(`apps/${id}`),
-        RocketChat.API.get(`apps/${id}/logs`)
-      ])
+      const id = this.id.get()
+      Promise.all([RocketChat.API.get(`apps/${id}`), RocketChat.API.get(`apps/${id}/logs`)])
         .then(results => {
-          instance.app.set(results[0].app);
-          instance.logs.set(results[1].logs);
+          instance.app.set(results[0].app)
+          instance.logs.set(results[1].logs)
 
-          this.ready.set(true);
+          this.ready.set(true)
         })
         .catch(e => {
-          instance.hasError.set(true);
-          instance.theError.set(e.message);
-        });
-    });
+          instance.hasError.set(true)
+          instance.theError.set(e.message)
+        })
+    })
     ```
 
 - [Blaze API](http://blazejs.org/api/blaze.html)
@@ -842,13 +836,13 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
     将数据和模板绑定,插入到节点. `data`为数据,若无此参数,和`render`基本相同
   - `Blaze.remove（renderedView）` 从 DOM 中删除节点,然后停止跟踪和更新节点
     ```js
-    var myData3 = Blaze.render(myData, myData2);
+    var myData3 = Blaze.render(myData, myData2)
     // 3s后删除数据
     Meteor.setTimeout(() => {
-      Blaze.remove(myData3);
-    }, 3000);
+      Blaze.remove(myData3)
+    }, 3000)
     //OR
-    Blaze.remove(Blaze.getView(document.getElementsByClassName("Test")[0]));
+    Blaze.remove(Blaze.getView(document.getElementsByClassName('Test')[0]))
     ```
   - `Blaze.getData（[elementOrView]）` 返回当前数据,`elementOrView` 为渲染的元素
   - `Blaze.toHTMLWithData（templateOrView，data）` 将模板渲染成 HTML,`templateOrView` 为用于生成 HTML 的模板,`data`为关联数据
@@ -871,16 +865,16 @@ Meteor 用集合保存数据.集合里保存的 Javascript 对象叫做文档.�
 
 ```js
 //前后端创建同名Collection对象
-var msgs = new Mongo.Collection("messages");
+var msgs = new Mongo.Collection('messages')
 if (Meteor.isServer) {
   //后端发布
-  Meteor.publish("ezpub", function() {
-    return msgs.find();
-  });
+  Meteor.publish('ezpub', function() {
+    return msgs.find()
+  })
 }
 if (Meteor.isClient) {
   //前端订阅
-  Meteor.subscribe("ezpub");
+  Meteor.subscribe('ezpub')
 }
 ```
 
@@ -908,15 +902,15 @@ if (Meteor.isClient) {
 - `find([selector],[options])` 查找集合中满足指定条件的文档 . `selector` 指定文档选择符,如果为`{}`,则查询集合下的所有. `options` 指筛选条件,JOSN 格式: 返回数目,排序顺序... , [详情](https://wizardforcel.gitbooks.io/meteor-doc/content/12.html#options)
 
   ```js
-  var demo = new Mongo.Collection("persons");
+  var demo = new Mongo.Collection('persons')
   //对返回结果按 age 字段排序
-  var cursor = demo.find({}, { sort: { age: 1 } });
+  var cursor = demo.find({}, { sort: { age: 1 } })
   //跳过指定数量文档:年龄大于20,并跳过100个文档返回剩余的
-  var cursor = demo.find({ age: { $gt: 20 } }, { skip: 100 });
+  var cursor = demo.find({ age: { $gt: 20 } }, { skip: 100 })
   //限定返回文档数量,分页:年龄大于20,并返回最多10个文档
-  var cursor = demo.find({ age: { $gt: 20 } }, { limit: 10 });
+  var cursor = demo.find({ age: { $gt: 20 } }, { limit: 10 })
   //对所有返回结果限定:返回每个文档中的namge.tel字段
-  var cursor = demo.find({}, { fields: { name: 1, tel: 1 } });
+  var cursor = demo.find({}, { fields: { name: 1, tel: 1 } })
   ```
 
   `find()`查询出来的结果是一个`游标/Cursor`对象,只是记录数据库地址,查询条件,查询选项,没有物理的访问数据库,真正获取数据,需要使用游标对象方法
@@ -924,21 +918,21 @@ if (Meteor.isClient) {
   - `Cursor.forEach(callback,[thisArg])`对游标匹配的文档集中的每一个文档执行 callback 参数指定的处理函数
 
     ```js
-    demo.find({ name: "Jason" }).forEach(function(doc) {
-      console.log(doc.tel);
-    });
+    demo.find({ name: 'Jason' }).forEach(function(doc) {
+      console.log(doc.tel)
+    })
     ```
 
   - `Cursor.map(callback,[thisArg])` 匹配每一个文档对象,通过 callback 参数指定的 映射函数 返回一个新值
     ```js
-    var tels = demo.find({ name: "Jason" }).map(function(doc) {
-      return doc.tel;
-    });
+    var tels = demo.find({ name: 'Jason' }).map(function(doc) {
+      return doc.tel
+    })
     ```
   - `Cursor.fetch()` 提取游标匹配的所有文档,返回这些文档组成的数组
     ```js
-    var demo = new Mongo.Collection("persons");
-    var persons = demo.find().fetch();
+    var demo = new Mongo.Collection('persons')
+    var persons = demo.find().fetch()
     ```
   - `Cursor.count()` 返回游标匹配的文档数量
 
@@ -962,13 +956,13 @@ if (Meteor.isClient) {
 - `remove(selector,[callback])` 删除指定文档.`selector` 指文档选择符,为文档 ID 或合法的 MongoDB 选择符,`callback()` 更新完后的回调
 
   ```js
-  var demo = new Mongo.Collection("persons");
-  demo.remove({ name: "Jason" });
+  var demo = new Mongo.Collection('persons')
+  demo.remove({ name: 'Jason' })
   ```
 
-  `remove()`方法的行为取决于是在受信代码中被调用，还是在非受信代码中被调用. `服务端`代码被认为是受信代码，而浏览器中运行的`客户端`代码被认为是非受信代码. 
+  `remove()`方法的行为取决于是在受信代码中被调用，还是在非受信代码中被调用. `服务端`代码被认为是受信代码，而浏览器中运行的`客户端`代码被认为是非受信代码.
 
-  在受信代码中，可以使用`任意MongoDB的选择符`实现一次删除`多个`文档，然而在非受信代码中，只能使用文档的`_id`作为选择符，一次删除`一个`文档，而且还必须通过应用层 设置的`allow`和`deny`规则检查. 
+  在受信代码中，可以使用`任意MongoDB的选择符`实现一次删除`多个`文档，然而在非受信代码中，只能使用文档的`_id`作为选择符，一次删除`一个`文档，而且还必须通过应用层 设置的`allow`和`deny`规则检查.
 
 - [Meteor.wrapAsync(func, [context])](https://docs.meteor.com/api/core.html#Meteor-wrapAsync) : 在服务端执行,将异步函数封装成同步函数.封装后的函数在服务端既可以作为异步函数(传入回调函数)也可以作为同步函数使用(不传入回调函数). 在客户端(浏览器端)还是需要传入回调函数作为异步函数使用,注意在异步函数中需要有回调函数,否则会堵塞,[详情](https://www.cnblogs.com/meteorcn/p/MeteorJS_Async_Fiber_Future_Wrap.html)
 
@@ -1005,51 +999,51 @@ if (Meteor.isClient) {
 // Information about this package:
 Package.describe({
   // Short two-sentence summary
-  summary: "What this does",
+  summary: 'What this does',
   // Version number
-  version: "1.0.0",
+  version: '1.0.0',
   // Optional, default is package directory name
-  name: "username:package-name",
+  name: 'username:package-name',
   // Optional GitHub URL to your source repository
-  git: "https://github.com/something/something.git"
-});
+  git: 'https://github.com/something/something.git'
+})
 
 // This defines your actual package:
 Package.onUse(api => {
   // If no version is specified for an `api.use` dependency, use the one defined
   // in Meteor 1.4.3.1.
-  api.versionsFrom("1.4.3.1");
+  api.versionsFrom('1.4.3.1')
   // Use the `underscore` package, but only on the server. Version not
   // specified, so it will be as of Meteor 1.4.3.1.
-  api.use("underscore", "server");
+  api.use('underscore', 'server')
   // Use `kadira:flow-router`, version 2.12.1 or newer.
-  api.use("kadira:flow-router@2.12.1");
+  api.use('kadira:flow-router@2.12.1')
   // Give users of this package access to active-route's JavaScript helpers.
-  api.imply("zimme:active-route@2.3.2");
+  api.imply('zimme:active-route@2.3.2')
   // Export the object `Email` to packages or apps that use this package.
-  api.export("Email", "server");
+  api.export('Email', 'server')
   // Specify the source code for the package.
-  api.addFiles("email.js", "server");
+  api.addFiles('email.js', 'server')
   // When using `ecmascript` or `modules` packages, you can use this instead of
   // `api.export` and `api.addFiles`.
-  api.mainModule("email.js", "server");
-});
+  api.mainModule('email.js', 'server')
+})
 
 // This defines the tests for the package:
 Package.onTest(api => {
   // Sets up a dependency on this package.
-  api.use("username:package-name");
+  api.use('username:package-name')
   // Use the Mocha test framework.
-  api.use("practicalmeteor:mocha@2.4.5_2");
+  api.use('practicalmeteor:mocha@2.4.5_2')
   // Specify the source code for the package tests.
-  api.addFiles("email_tests.js", "server");
-});
+  api.addFiles('email_tests.js', 'server')
+})
 
 // This lets you use npm packages in your package:
 Npm.depends({
-  simplesmtp: "0.3.10",
-  "stream-buffers": "0.2.5"
-});
+  simplesmtp: '0.3.10',
+  'stream-buffers': '0.2.5'
+})
 ```
 
 `Package.onUse（FUNC）` 定义包依赖关系,和公开包的方法
@@ -1150,9 +1144,8 @@ Npm.depends({
       #		try_files $uri $uri/ =404;
       #	}
       #}
-      
-  ```
 
+  ```
 
 ### [SSL 简化申请流程](https://caloskao.org/ubuntu-use-certbot-to-automatically-update-lets-encrypt-certificate-authority/)
 
@@ -1172,16 +1165,16 @@ Npm.depends({
 
 ## [Kubernetes](https://github.com/wh211212/awesome-kubernetes-cn) && [Docker](http://guide.daocloud.io/dcs/docker-9152673.html)
 
-Kubernetes是一个开源系统，用于自动化集装箱化应用程序的部署，扩展和管理.
-Docker 是一种容器技术，它可以将应用和环境等进行打包，形成一个独立的，类似于 iOS 的 APP 形式的「应用」，这个应用可以直接被分发到任意一个支持 Docker 的环境中，通过简单的命令即可启动运行. 
-Docker 是一种最流行的容器化实现方案. 和虚拟化技术类似，它极大的方便了应用服务的部署；又与虚拟化技术不同，它以一种更轻量的方式实现了应用服务的打包. 
-使用 Docker 可以让每个应用彼此相互隔离，在同一台机器上同时运行多个应用，不过他们彼此之间共享同一个操作系统. Docker 的优势在于，它可以在更细的粒度上进行资源的管理，也比虚拟化技术更加节约资源. 
+Kubernetes 是一个开源系统，用于自动化集装箱化应用程序的部署，扩展和管理.
+Docker 是一种容器技术，它可以将应用和环境等进行打包，形成一个独立的，类似于 iOS 的 APP 形式的「应用」，这个应用可以直接被分发到任意一个支持 Docker 的环境中，通过简单的命令即可启动运行.
+Docker 是一种最流行的容器化实现方案. 和虚拟化技术类似，它极大的方便了应用服务的部署；又与虚拟化技术不同，它以一种更轻量的方式实现了应用服务的打包.
+使用 Docker 可以让每个应用彼此相互隔离，在同一台机器上同时运行多个应用，不过他们彼此之间共享同一个操作系统. Docker 的优势在于，它可以在更细的粒度上进行资源的管理，也比虚拟化技术更加节约资源.
 
 ### Kubernetes [中文文档](http://docs.kubernetes.org.cn/247.html) [模型文档](https://kubernetes.io/docs/reference/federation/v1/definitions/)
 
 Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中心，node 是提供 CPU、内存和存储资源的节点. Master 上运行着很多进程，包括面向用户的 API 服务、负责维护集群状态的 Controller Manager、负责调度任务的 Scheduler 等. 每个 node 上运行着维护 node 状态并和 master 通信的 kubelet，以及实现集群网络服务的 kube-proxy
 
-- `Service` [抽象定义](https://kubernetes.io/zh/docs/concepts/services-networking/service/),一个 Pod 的逻辑分组，一种可以访问它们的策略 —— 通常称为微服务.  这一组 Pod 能够被 Service 访问到，通常是通过 Label Selector（查看下面了解，为什么可能需要没有 selector 的 Service）实现的
+- `Service` [抽象定义](https://kubernetes.io/zh/docs/concepts/services-networking/service/),一个 Pod 的逻辑分组，一种可以访问它们的策略 —— 通常称为微服务. 这一组 Pod 能够被 Service 访问到，通常是通过 Label Selector（查看下面了解，为什么可能需要没有 selector 的 Service）实现的
 
 ### 安装示例&注意事项
 
@@ -1198,9 +1191,9 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
     yum update
   ```
 
-- [批量导入xshell](https://blog.netsarang.com/91/importing-csv-formatted-host-information-to-xshell/),记得检查里面的逗号有没有分割,否则后报错,格式如下`PRD-svr75101,0.0.5.101,ssh,22,root,password`
+- [批量导入 xshell](https://blog.netsarang.com/91/importing-csv-formatted-host-information-to-xshell/),记得检查里面的逗号有没有分割,否则后报错,格式如下`PRD-svr75101,0.0.5.101,ssh,22,root,password`
 - `reboot` 重启,不要关机!!!
-- 未找到命令,多半是没安装..yum安装一下
+- 未找到命令,多半是没安装..yum 安装一下
 - 命令
 
   ```shell
@@ -1228,26 +1221,26 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
     cat /roles/kubernetes/preinstall/defaults/main.yml | grep disable_ipv6_dns
     # 查看node节点出错任务 (一般是python进程)
     ps aux | grep python
-  
+
   ```
 
 #### 单节点
 
-- 大坑!!! 配置镜像时,选择一个配置方式,1.12以上是,如果配置json文件无用,选择以下方式配置
-[修改docker.service](http://shouce.jb51.net/docker_practice/install/mirror.html),[修改docker.service2](https://www.jianshu.com/p/42772740f09a)
-如果同时配置了json和service文件,会启动错误,按照这个[配置](https://www.imooc.com/article/264027),然后重启一下docker
+- 大坑!!! 配置镜像时,选择一个配置方式,1.12 以上是,如果配置 json 文件无用,选择以下方式配置
+  [修改 docker.service](http://shouce.jb51.net/docker_practice/install/mirror.html),[修改 docker.service2](https://www.jianshu.com/p/42772740f09a)
+  如果同时配置了 json 和 service 文件,会启动错误,按照这个[配置](https://www.imooc.com/article/264027),然后重启一下 docker
 
-  ``` shell
+  ```shell
     systemctl daemon-reload
     systemctl restart docker
-  ````
+  ```
 
 - `docker代理` docker 的代理是独立于 centos 的，需要单独[配置](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
   **大坑!!!!!!!**---解决镜像源配置成功后,无法 pull 镜像或是登陆问题
 
-  ``` shell
+  ```shell
     vim /etc/systemd/system/multi-user.target.wants/docker.service
-    echo Environment='"HTTP_PROXY=http://你的代理/"' '"HTTPS_PROXY=http://你的代理(或者是有端口的)/"' >> /etc/systemd/system/multi-user.target.wants/docker.service 
+    echo Environment='"HTTP_PROXY=http://你的代理/"' '"HTTPS_PROXY=http://你的代理(或者是有端口的)/"' >> /etc/systemd/system/multi-user.target.wants/docker.service
   ```
 
 - `下载k8s所需镜像` 通过 Docker 下载提示的版本,[.sh 下载](https://haojianxun.github.io/2018/10/14/%E4%BD%BF%E7%94%A8kubeadm%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAkubernetesv1.11.1/),然后`init`初始化集群
@@ -1288,23 +1281,22 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
   ```
 
-
 #### 多节点高可用
 
-了解[Ansible](https://getansible.com/begin/an_zhuang_ansile),对多节点配置一般都是通过Ansible写配置然后一键生成,这里是他的[参数文档](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html?highlight=when)和[视频资料](https://www.bilibili.com/video/av25424954/).
+了解[Ansible](https://getansible.com/begin/an_zhuang_ansile),对多节点配置一般都是通过 Ansible 写配置然后一键生成,这里是他的[参数文档](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html?highlight=when)和[视频资料](https://www.bilibili.com/video/av25424954/).
 
 以及,需要用到的项目--- [Kubespray](https://github.com/kubernetes-sigs/kubespray),如果网络不错(你懂),配置十分便捷,注意官方文档总结的[要求](https://github.com/kubernetes-sigs/kubespray#user-content-requirements),下面是几篇不错的安装指南
 
-- [使用Kubespray 部署kubernetes 高可用集群](https://blog.51cto.com/foxhound/2044766)
+- [使用 Kubespray 部署 kubernetes 高可用集群](https://blog.51cto.com/foxhound/2044766)
 - [快速部署 kubernetes 高可用集群](https://mritd.me/2017/03/03/set-up-kubernetes-ha-cluster-by-kargo/)
 - [kargo 集群扩展及细粒度配置](https://mritd.me/2017/03/10/kargo-cluster-expansion-and-fine-grained-configuration/)
-- [用kargo快速自动化搭建kubernetes集群](https://tech.cuixiangbin.com/?p=1112)
-- [[Kubernetes] 使用kubespray安装k8s集群](https://www.huweihuang.com/article/kubernetes/install-k8s-by-kubespray/#top)
+- [用 kargo 快速自动化搭建 kubernetes 集群](https://tech.cuixiangbin.com/?p=1112)
+- [[Kubernetes] 使用 kubespray 安装 k8s 集群](https://www.huweihuang.com/article/kubernetes/install-k8s-by-kubespray/#top)
 
-下面是我遇到的错误(多半是网络错误,fu**)
+下面是我遇到的错误(多半是网络错误,fu\*\*)
 
-- Docker 镜像问题 : 
-  对于这个Kubespray来说,单节点的修改镜像方法并不适用,需要修改它的配置文件,我用了一个愚蠢的办法,拉下来项目,然后[全局替换掉docker下载地址](http://mirror.azure.cn/help/docker-registry-proxy-cache.html)
+- Docker 镜像问题 :
+  对于这个 Kubespray 来说,单节点的修改镜像方法并不适用,需要修改它的配置文件,我用了一个愚蠢的办法,拉下来项目,然后[全局替换掉 docker 下载地址](http://mirror.azure.cn/help/docker-registry-proxy-cache.html)
 
   ```shell
   ...
@@ -1314,10 +1306,10 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
   ```
 
 - yum 源问题 :
-  一般来讲阿里源已经够用了,注意的是要所有节点配置相同的yum源和epel源,然后统一生成缓存,[参考](https://my.oschina.net/dingzang/blog/702891)
+  一般来讲阿里源已经够用了,注意的是要所有节点配置相同的 yum 源和 epel 源,然后统一生成缓存,[参考](https://my.oschina.net/dingzang/blog/702891)
 
 - 一系列的网络问题 :
-  集中在访问几个任务中 ,都是网络代理原因导致访问ipv6网络的请求失败例子
+  集中在访问几个任务中 ,都是网络代理原因导致访问 ipv6 网络的请求失败例子
 
   | 任务                                      | 路径                                                         |
   | ----------------------------------------- | ------------------------------------------------------------ |
@@ -1326,9 +1318,9 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
   | `check if container-selinux is available` | `roles/container-engine/docker/tasks/main.yml`               |
   | `kubernetes image repo define`            | `roles/download/defaults/main.yml`                           |
 
-   <small>*这里需要注意上一步的是修改kus的下载地址*   </small> 
+  <small>_这里需要注意上一步的是修改 kus 的下载地址_ </small>
 
-  通过 $http_proxy 来获取你的代理地址,添加到访问出错的任务列表里
+  通过 \$http_proxy 来获取你的代理地址,添加到访问出错的任务列表里
 
   在上述路径里,添加代理字段 `http_proxy`
 
@@ -1344,7 +1336,7 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
     until: yum_task_result is succeeded
     retries: 4
     ...
-  
+
   ```
 
   ```shell
@@ -1360,10 +1352,10 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
   ```
 
-- 在配置成功后 ,添加node节点成功但是显示 `NotReady` :
-  网络插件问题,可以查看node节点信息看到 `kubectl describe node [nodename]`
+- 在配置成功后 ,添加 node 节点成功但是显示 `NotReady` :
+  网络插件问题,可以查看 node 节点信息看到 `kubectl describe node [nodename]`
   [修改方式](https://github.com/kubernetes/kubeadm/issues/1031)就是,下载`kube-flannel.yml` 文件
-  
+
   ```shell
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
@@ -1373,11 +1365,11 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
     kubecli get nodes
   ```
 
-- `FAILED! => {"msg": "Timeout (12s) waiting for privilege escalation prompt: "}` 问题, 多半发生在重置集群后,因为[权限问题](https://github.com/ansible/ansible/issues/33699),解决办法,制定ansbile `-T` 命令,一般是 300 , `ansbile ... -T 300`
+- `FAILED! => {"msg": "Timeout (12s) waiting for privilege escalation prompt: "}` 问题, 多半发生在重置集群后,因为[权限问题](https://github.com/ansible/ansible/issues/33699),解决办法,制定 ansbile `-T` 命令,一般是 300 , `ansbile ... -T 300`
 
-- [Dashboard 查看](https://godleon.github.io/blog/Kubernetes/k8s-Deploy-and-Access-Dashboard/) ,注意这篇文章sh命令,是换行
+- [Dashboard 查看](https://godleon.github.io/blog/Kubernetes/k8s-Deploy-and-Access-Dashboard/) ,注意这篇文章 sh 命令,是换行
 
-- 查看错误,多半在项目的lssues中,可以搜索关键字来确认,这是一些错误集锦 :
+- 查看错误,多半在项目的 lssues 中,可以搜索关键字来确认,这是一些错误集锦 :
   [https://github.com/kubernetes/kubeadm/issues/1031](https://github.com/kubernetes/kubeadm/issues/1031)
   [https://github.com/kubernetes/kubernetes/issues/67057](https://github.com/kubernetes/kubernetes/issues/67057)
   [https://github.com/kubernetes-sigs/kubespray](https://github.com/kubernetes-sigs/kubespray)
@@ -1386,8 +1378,7 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
   [https://github.com/kubernetes/kubeadm/issues/1031](https://github.com/kubernetes/kubeadm/issues/1031)
   ...(太多忘了存)
 
-还有一些常用的sh命令,在另一个文件里
-
+还有一些常用的 sh 命令,在另一个文件里
 
 ## Redis
 
@@ -1588,7 +1579,7 @@ Java 语言提供了八种基本类型，其中包括六种数字类型（四种
       yield 1
   ```
 
-  除了返回值不相同,和普通函数没有太大区别.func() 是一个 int 类型的对象；而 gen() 则是一个迭代器对象. 
+  除了返回值不相同,和普通函数没有太大区别.func() 是一个 int 类型的对象；而 gen() 则是一个迭代器对象.
   当函数内遇到 yield 关键字后,将返回生成器对象,变量保存(暂存),直到下一次迭代调用时,从之前暂存位置开始读取
 
   ```Python
@@ -1633,6 +1624,12 @@ Java 语言提供了八种基本类型，其中包括六种数字类型（四种
     #尝试过大索引会报错,如word[89],但长度只有6
     #不可给索引赋值,可以尝试创建新的字符串拼接
   ```
+
+## Odoo
+
+[Odoo 开发手册 12 版](https://alanhou.org/odoo-12-development/),记录一下总体过程
+
+[详情点这里](./Odoo/Odoo.md)
 
 ## 参考资料
 
