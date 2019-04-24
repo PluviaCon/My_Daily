@@ -389,16 +389,16 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 **Linux 文件权限码**
 
-| 权限 | 二进制值 | 八进制值 | 描述             |
-| :--: | :------: | :------: | :--------------- |
-| ---  |   000    |    0     | 没有任何权限     |
-| --x  |   001    |    1     | 只有执行权限     |
-| -w-  |   010    |    2     | 只有写入权限     |
-| -wx  |   011    |    3     | 有写入和执行权限 |
-| r--  |   100    |    4     | 只有读取权限     |
-| r-x  |   101    |    5     | 有读取和执行权限 |
-| rw-  |   110    |    6     | 有读取和写入权限 |
-| rwx  |   111    |    7     | 有全部权限       |
+| 权限  | 二进制值 | 八进制值 | 描述             |
+| :---: | :------: | :------: | :--------------- |
+|  ---  |   000    |    0     | 没有任何权限     |
+|  --x  |   001    |    1     | 只有执行权限     |
+|  -w-  |   010    |    2     | 只有写入权限     |
+|  -wx  |   011    |    3     | 有写入和执行权限 |
+|  r--  |   100    |    4     | 只有读取权限     |
+|  r-x  |   101    |    5     | 有读取和执行权限 |
+|  rw-  |   110    |    6     | 有读取和写入权限 |
+|  rwx  |   111    |    7     | 有全部权限       |
 
 **修改权限**
 
@@ -1215,8 +1215,8 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
     # 查看详细pod日志 通过kubectl get pod 获取名称
     kubectl logs -n kube-system kubernetes-dashboard-58ddfdfd68-nv884
     # ansible 安装 重置 命令
-    ansible-playbook -u centos -b -i inventory/inventory.cfg cluster.yml
-    ansible-playbook -i inventory/inventory.cfg reset.yml -b -v --private-key=~/.ssh/id_rsa
+    ansible-playbook -u centos -b -i inventory/inventory.cfg cluster.yml -vvv
+    ansible-playbook -i inventory/inventory.cfg reset.yml -b -vvv --private-key=~/.ssh/id_rsa
     # 查看 disable_ipv6_dns
     cat /roles/kubernetes/preinstall/defaults/main.yml | grep disable_ipv6_dns
     # 查看node节点出错任务 (一般是python进程)
