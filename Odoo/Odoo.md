@@ -6,6 +6,18 @@
 
 安装示例有很详细的过程,开发是 Ubuntu 系统,所以选择这个来配置---- [Ubuntu 快速安装配置 Odoo 12](https://alanhou.org/odoo-12/)
 
+```shell
+
+  sudo docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:10
+  sudo docker run -v /www/odoo/addons:/mnt/extra-addons -p 8069:8069 --name odoo --link db:db -t odoo
+
+  docker container stop db
+  docker container rm db
+  docker container stop odoo
+  docker container rm odoo
+
+```
+
 **注意事项**
 
 - `psycopg2` 安装问题 :
