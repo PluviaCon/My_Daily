@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_yu_movies_list_kanban">
+            <field name="name">yu.movies.kanban</field>
+            <field name="model">yu.movies</field>
+            <field name="arch" type="xml">
+                <kanban >
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="area_id"/>
+                    <field name="show_date"/>
+                    <field name="score"/>
+                    <field name="poster"/>
+                    <field name="directors"/>
+                    <field name="actors"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                          <div class="oe_module_vignette oe_kanban_global_click">
+                              <div class="o_kanban_image">
+                                <t t-set="liked" t-value="record.liked == 'True'"/>
+                                <t t-set="watched" t-value="record.watched == 'True'"/>
+                                <t t-set="planed" t-value="record.planed == 'True'"/>
+                                    <img t-att-src="kanban_image('yu.movies', 'image_small', record.id.poster)"/>
+                              </div>
+                              <div class="oe_module_desc">
+                                <h2><field name="name"/></h2>
+                                <p><label>导演:</label><field name="directors"  widget="mny2many_tags" /></p> 
+                                <p><label>主演:</label><field name="actors" widget="mny2many_tags "/></p> 
+                                <p><label>评分:</label><field name="score"/></p> 
+                                <p><label>地区:</label><field name="area_id"/></p>
+                                <p><label>上映日期:</label><field name="show_date"/></p>
+                                <p class="oe_module_name">
+                                 <button type="object" class="btn btn-primary pull-right btn-sm" name="action_planed" planed="True">计划</button>
+                                  <button type="button" t-if="planed" class="btn btn-default pull-right btn-sm disabled" planed="False">取消计划</button>
+                                  <button type="object" class="btn btn-primary pull-right btn-sm" name="action_watched" watched="True">看过</button>
+                                  <button type="button" t-if="watched" class="btn btn-default pull-right btn-sm disabled" watched="False">取消看过</button>
+                                  <button type="object" class="btn btn-primary pull-right btn-sm" name="action_liked" liked="True">喜欢</button>
+                                  <button type="button" t-if="liked" class="btn btn-default pull-right btn-sm disabled" liked="False">取消喜欢</button>
+                                 
+                                <!-- <t t-if="record.area_id.raw_value"><field name="area_id"/><br/></t> -->
+                                </p>
+                              </div>
+                          </div>
+                        </t>
+                  </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="view_yu_movies_list_tree" model="ir.ui.view">
+            <field name="name">yu.movies</field>
+            <field name="model">yu.movies</field>
+            <field name="arch" type="xml">
+                <tree string="电影列表">
+                    <field name="name" />
+                    <field name="show_date"/>
+                    <field name="area_id"/>
+                    <field name="score"/>
+                    <field name="liked"/>
+                    <button name="action_liked" string="❤️喜欢" type="object"
+                            attrs="{'invisible':[('liked','=','True')]}"/>
+                    <field name="watched"/>
+                    <button name="action_watched" string="👀已看" type="object"
+                            attrs="{'invisible':[('watched','=','True')]}"/>
+                    <field name="planed"/>
+                    <button name="action_planed" string="📅计划" type="object"
+                            attrs="{'invisible':[('planed','=','True')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_yu_movies_list_form">
+            <field name="name">yu.movies</field>
+            <field name="model">yu.movies</field>
+            <field name="arch" type="xml">
+                <form string="电影详情">
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="directors" widget="many2many_tags"/>
+                                <field name="actors" widget="many2many_tags"/>
+                                <field name="show_date"/>
+                                <field name="area_id"/>
+                                <field name="style_ids" widget="many2many_tags" />
+                                <field name="score"/>
+                                <label for ="your_actions" string="关于电影,你..."/>
+                                <div>
+                                      <field name="liked"/>
+                                      <label for="liked" string="喜欢"/>
+
+                                      <field name="watched"/>
+                                      <label for="watched" string="已看过"/>
+
+                                      <field name="planed"/>
+                                      <label for="planed" string="计划看"/>
+                                </div>
+                                <field name="summary"/>
+                                <field name="film_critic"/>
+                            </group>
+                            <group>
+                                <field name="poster"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="大家来评论" autofocus="autofocus">
+                                <field name="film_comments">
+                                    <tree string="评论" editable="bottom">
+                                        <field name="stars" required='1'/>
+                                        <field name="comment"/>
+                                         <field name="create_uid" string='评论者' readonly='1' />
+                                        <field name="create_date" string='评论时间' readonly='1' />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="获奖情况" autofocus="autofocus">
+                                <field name="film_awards">
+                                    <tree string="获奖" editable="bottom">
+                                        <field name="movies_awards_id" required='1'/>
+                                        <field name="awards_type_id" required='1'/>
+                                        <field name="awards" required='1' />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </form>
+            </field>
+        </record>
+    </data>
+    <data noupdate="1">
+    <!--定时程序-->
+    <record id="ir_cron_movies_action" model="ir.cron">
+        <field name="name">Check Movies Types</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field eval="True" name="doall"/>
+        <field eval="'yu.movies'" name="model"/>
+        <field eval="'_check_movies_types'" name="function"/>
+        <field eval="0" name="priority"/>
+        <field name="active" eval="True"/>
+    </record>
+    </data>
+</openerp>

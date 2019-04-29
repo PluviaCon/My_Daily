@@ -1,34 +1,33 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "qingjia",
+    'name': "Movies",
 
     'summary': """
-        请假模块""",
-
-    'description': """
-        请假模块
+        testOdooMovies
     """,
 
-    'author': "leo",
-    'website': "http://www.yourcompany.com",
+    'description': """
+        MoviesMoviesMoviesMovies!
+    """,
 
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
-    # for the full list
+    'author': "kong",
+    'website': "http://www.yourcompany.com",
     'category': 'Uncategorized',
     'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
-
-    # always loaded
+    'sequence': 1000,
+    'depends': [],
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/index.xml',
+        'views/movies_list.xml',
+        'views/type.xml',
+        'views/actor.xml',
+        'views/director.xml',
+        'views/area.xml',
+        'views/awards.xml',
+        'views/awards_type.xml',
+        'views/album.xml',
+        'views/homepage.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    'demo': [],
 }

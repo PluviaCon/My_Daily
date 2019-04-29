@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_yu_areas_list_tree" model="ir.ui.view">
+            <field name="name">yu.area</field>
+            <field name="model">yu.area</field>
+            <field name="arch" type="xml">
+                <tree string="地区列表">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_yu_areas_list_form">
+            <field name="name">yu.area</field>
+            <field name="model">yu.area</field>
+            <field name="arch" type="xml">
+                <form string="地区详情">
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                        </group>
+                         <notebook colspan="4">
+                            <page string="地区电影列表" autofocus="autofocus">
+                                <field name="area_movies">
+                                    <tree string="地区电影列表" editable="bottom">
+                                        <field name="movies_id" />
+                                        <field name="show_date" readonly='1'/>
+                                        <field name="directors" readonly='1'/>
+                                        <field name="area_id" readonly='1' />
+                                        <field name="score" readonly='1'/>
+                                        <field name="style_ids" readonly='1' />
+                                        <!-- <field name="actors" readonly='1' /> -->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
