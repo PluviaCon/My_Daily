@@ -134,6 +134,8 @@
 
 继承的方式有很多种,继承内置模块或是自定义模块,或是拓展已存在的模块
 
+#### 原模型继承
+
 拓展模块可以用 python 的类属性 `_inherit`,指定了被扩展的模块.通过 `_inherit` 指定被继承模块后我们新创建的类能获得父类模块的所有功能.因此只要对需要修改的地方进行重构.
 
 ```python
@@ -143,16 +145,15 @@
     _inherit = 'todo.task'
     user_id = fields.Many2one('res.users', string='Responsible')
     date_deadline = fields.Date('Deadline')
-
-  # _inherit作为关键属性:告诉了Odoo我们建立的’TodoTask’这个class是继承并自’todo.task’.
-  # 注意点:_name属性在这里没有出现,因为它已经从’todo.task’中被继承了
-
-  # user_id字段代表了来自’res.users’这个模型的用户,它是一个Many2one字段,从数据库角度来说，就是一个外键的作用.
-  # date_deadline是一个简单的日期字段.我们更新我们的’todo_user’模块后进入Technical | Database Structure | Models菜单.
-  # 搜索todo.task模型会发现其中新增了我们刚添加的2个字段.
 ```
 
-使用了\_inherite 属性,没有使用\_name.所以继承模块还是使用 todo.task 的数据库表结构. 使用`_name` 属性,可以创建一个新的数据库来复制被继承模块的功能
+`_inherit` 作为关键属性:告诉了 Odoo 我们建立的’TodoTask’这个 class 是继承并自’todo.task’.注意点:`_name` 属性在这里没有出现,因为它已经从’todo.task’中被继承了.
+
+可以把这个想成是对模型定义的一个引用，在原处做了一个修改。可以添加字段、修改已有字段、修改模型类属性甚至是包含业务逻辑的方法
+
+user_id 字段代表了来自’res.users’这个模型的用户,它是一个 Many2one 字段,从数据库角度来说，就是一个外键的作用.date_deadline 是一个简单的日期字段.我们更新我们的’todo_user’模块后进入 Technical | Database Structure | Models 菜单.搜索 todo.task 模型会发现其中新增了我们刚添加的 2 个字段.
+
+使用了`_inherite` 属性,没有使用`_name`.所以继承模块还是使用 todo.task 的数据库表结构. 使用`_name` 属性,可以创建一个新的数据库来复制被继承模块的功能(创建所继承模型的拷贝，成为一个新模型).
 
 ```python
   from odoo import models
@@ -161,7 +162,7 @@
     _inherit = 'mail.thread'
 ```
 
-### view 视图
+#### view 视图
 
 表单,列表,搜索视图(在 web 端表示为具体页面操作)都是被`arch`所定义的 XML 结构.为了拓展视图,需要修改 xml,具体做法是限定为到要修改的 xml 位置,然后进行插入修改或是完全修改
 
@@ -190,9 +191,7 @@
 
 ```
 
-`inherit_id` 字段定义了需要被继承的视图.通过 ref 属性传入被继承的视图的外部 ID(External identifiers),使用`Xpath`来定位 XML 元素是最合适的,举例来说,定位到`<field name="is_done">`这个元素可以使用表达式`//field[@name] = 'is_done'`来实现
-
-或是进行缩写,通过`position`属性
+`inherit_id` 字段定义了需要被继承的视图.通过 ref 属性传入被继承的视图的外部 ID(External identifiers),使用`Xpath`来定位 XML 元素是最合适的,举例来说,定位到`<field name="is_done">`这个元素可以使用表达式`//field[@name] = 'is_done'`来实现,或是进行缩写,通过`position`属性
 
 ```xml
   <field name="is_done" position="before">
@@ -200,7 +199,10 @@
   </field>
 ```
 
-**注意** : 当一个字段多次出现在同一个 view 中,还是需要使用 Xpath 表达式,因为缩写形式在查找到第一个元素后就停止继续定位了.`position`属性有这几个具体值:
+**注意** :
+当一个字段多次出现在同一个 view 中,还是需要使用 Xpath 表达式,因为缩写形式在查找到第一个元素后就停止继续定位了.
+在 9.0 以前，string 属性(显示标签文本）也可作为继承定位符。在 9.0 之后则不再允许。这一限制主要源自这些字符串的语言翻译机制。
+`position`属性有这几个具体值:
 
 - `after` 添加到匹配节点后
 - `before` 添加到匹配节点前面
@@ -208,17 +210,26 @@
 - `replace` 代替匹配到的节点,如果使用空内容相当于删除了匹配到的元素
 - `attributes` 修改匹配元素的属性 , 使用 `<attribute name="attr-name">` 来进行新属性的设置举例
 
-  ```xml
-    <field name="active" position="attributes">
-      <attribute name='invisible'>1</attribute>
-    </field>
+```xml
+  <field name="active" position="attributes">
+    <attribute name='invisible'>1</attribute>
+  </field>
 
-    <!--
-    这段代码表示把’acitve’这个字段隐藏起来
-    实际的开发中,我们使用添加’invisible’这个属性来让字段在页面隐藏而尽量避免使用’replace’,
-    因为’replace’会删除我们定位到的节点(有时候这些节点只是作为一个占位符，当replace删除后会改变整个视图的结构)
-    -->
-  ```
+  <!--
+  这段代码表示把’acitve’这个字段隐藏起来
+  实际的开发中,我们使用添加’invisible’这个属性来让字段在页面隐藏而尽量避免使用’replace’,
+  因为’replace’会删除我们定位到的节点(有时候这些节点只是作为一个占位符，当replace删除后会改变整个视图的结构)
+  -->
+```
+
+除了 attributes 定位，上述定位符可与带 position=”move”的子元素合并。效果是将子定位符目标节点移到父定位符目录位置。
+
+```xml
+  <field name="target_field" position="after">
+      <field name="my_field" position="move"/>
+  </field>
+  <!-- position=”move”子定位符是 Odoo 12中新增的，之前的版本中没有 -->
+```
 
 示例: 添加 search 视图
 
@@ -238,3 +249,37 @@
     </field>
   </record>
 ```
+
+`<record id=”x” model=”y”>`数据加载元素实际是对 y 模型进行插入或更新操作。若不存在记录 x，则被创建，否则被更新/覆盖。其它模块中的记录可通过`<module>.<identifier>`全局标识符访问，因此可以在我们的模块中重写其它模块中已写入的数据。(点号是保留符号，用于分隔模块名和对象标识符，所以在标识符名中不要使用点号，而应使用下划线字符。)
+
+```xml
+  <odoo>
+      <record id="library_app.library_group_user" model="res.groups">
+          <field name="name">Librarian</field>
+      </record>
+  </odoo>
+```
+
+#### 代理继承
+
+之前的模型继承,即是经典继承.还有一种代理继承,场景是不通过复制原模型的情况下,复用模型里的字段,实现避免结构冗余.使用代理继承无需复制数据即可在数据库中复用数据结构，这通过将一个模型嵌入另一个来实现。UML 中这种称作组合(composition)关系：父类无需子类即可存在，而子类必须要有父类才能存在。
+
+```python
+  from odoo import fields, models
+
+  class Member(models.Model):
+      _name = 'library.member'
+      _description = 'Library Member'
+      card_number = fields.Char()
+      partner_id = fields.Many2one(
+          'res.partner',
+          delegate=True,
+          ondelete='cascade',
+          required=True)
+```
+
+代理继承可通过如下组合来进行替代：
+
+- 父模型中的一个 many-to-one 字段
+- 重载 create()方法自动创建并设置父级记录
+- 父字段中希望暴露的特定字段的关联字段
