@@ -47,7 +47,12 @@
     sudo docker run -p 8069:8069 --name odoo --link db:db -t odoo
   ```
 
-  docker 安装时注意镜像版本号,可以去官网拉去制定版本号安装,并映射目录,也可以在docker run 之后查看启动命令输出,查看镜像里 odoo 插件的所在目录
+  docker 安装时注意镜像版本号,可以去官网拉去制定版本号安装,并映射目录,也可以在 docker run 之后查看启动命令输出,查看镜像里 odoo 插件的所在目录:
+
+  ```shell
+    docker start imagename -a #输出docker信息
+    docker exec -u root -it imagename /bin/bash #进入docker 内部
+  ```
 
 ## 模块插件
 
@@ -78,8 +83,8 @@
 
 - 可选择为模块添加一个图标
 - 如打算对外发布，为模块选择一个证书
-- 如果安装失败,检查用户权限和odoo版本原因,有可能是odoo版本更新后语法不同所致
-- 可以再web端操作的,就不要去改代码了....
+- 如果安装失败,检查用户权限和 odoo 版本原因,有可能是 odoo 版本更新后语法不同所致
+- 可以再 web 端操作的,就不要去改代码了....
 
 ### 插件模块详解 ---- 具体参照详情
 
@@ -117,13 +122,11 @@
 
 `record` 标签里的 `model` 属性,对应不同的模型,用来区分用途; `field` 标签用来添加字段.具体参照官方文档的[说明](https://www.odoo.com/documentation/12.0/howtos/backend.html#relations-between-models)
 
+在配置好模块的 xml 后,需要在`models` 目录下添加模型的`.py` 文件,每一个模型对应一个文件,创建后在`models` 目录下的`__init__.py` 下引入模块 --- 模型的[具体属性](https://www.odoo.com/documentation/12.0/reference/orm.html#model-reference)
 
-在配置好模块的xml后,需要在`models` 目录下添加模型的`.py` 文件,每一个模型对应一个文件,创建后在`models` 目录下的`__init__.py` 下引入模块 --- 模型的[具体属性](https://www.odoo.com/documentation/12.0/reference/orm.html#model-reference)
+所有的表单视图都存储在数据库的`ir.ui.view` 模型中,在`record`标签中运入 model`ir.ui.view`.
 
-
-所有的表单视图都存储在数据库的`ir.ui.view` 模型中,在`record`标签中运入model`ir.ui.view`.
-
-这个ir.ui.view记录有三个字段值：name, model和 arch. 另一个重要元素是记录 id，它定义了一个可在其它记录中引用的XML ID标识符.
+这个 ir.ui.view 记录有三个字段值：name, model 和 arch. 另一个重要元素是记录 id，它定义了一个可在其它记录中引用的 XML ID 标识符.
 
 最重要的字段是`arch`，它包含了视图的定义，在 XML 代码中我们做了高亮显示（博客主题问题无法显示）. `<form>`标签定义了视图类型并包含视图结构.
 
@@ -131,7 +134,7 @@
 
 继承的方式有很多种,继承内置模块或是自定义模块,或是拓展已存在的模块
 
-拓展模块可以用python的类属性 `_inherit`,指定了被扩展的模块.通过 `_inherit` 指定被继承模块后我们新创建的类能获得父类模块的所有功能.因此只要对需要修改的地方进行重构.
+拓展模块可以用 python 的类属性 `_inherit`,指定了被扩展的模块.通过 `_inherit` 指定被继承模块后我们新创建的类能获得父类模块的所有功能.因此只要对需要修改的地方进行重构.
 
 ```python
   from odoo import models,fields,api
@@ -140,8 +143,8 @@
     _inherit = 'todo.task'
     user_id = fields.Many2one('res.users', string='Responsible')
     date_deadline = fields.Date('Deadline')
-  
-  # _inherit作为关键属性:告诉了Odoo我们建立的’TodoTask’这个class是继承并自’todo.task’. 
+
+  # _inherit作为关键属性:告诉了Odoo我们建立的’TodoTask’这个class是继承并自’todo.task’.
   # 注意点:_name属性在这里没有出现,因为它已经从’todo.task’中被继承了
 
   # user_id字段代表了来自’res.users’这个模型的用户,它是一个Many2one字段,从数据库角度来说，就是一个外键的作用.
@@ -149,7 +152,7 @@
   # 搜索todo.task模型会发现其中新增了我们刚添加的2个字段.
 ```
 
-使用了_inherite属性,没有使用_name.所以继承模块还是使用todo.task的数据库表结构. 使用`_name` 属性,可以创建一个新的数据库来复制被继承模块的功能
+使用了\_inherite 属性,没有使用\_name.所以继承模块还是使用 todo.task 的数据库表结构. 使用`_name` 属性,可以创建一个新的数据库来复制被继承模块的功能
 
 ```python
   from odoo import models
@@ -158,11 +161,9 @@
     _inherit = 'mail.thread'
 ```
 
+### view 视图
 
-
-### view视图
-
-表单,列表,搜索视图(在web端表示为具体页面操作)都是被`arch`所定义的XML结构.为了拓展视图,需要修改xml,具体做法是限定为到要修改的xml位置,然后进行插入修改或是完全修改
+表单,列表,搜索视图(在 web 端表示为具体页面操作)都是被`arch`所定义的 XML 结构.为了拓展视图,需要修改 xml,具体做法是限定为到要修改的 xml 位置,然后进行插入修改或是完全修改
 
 ```xml
 
@@ -189,7 +190,7 @@
 
 ```
 
-`inherit_id` 字段定义了需要被继承的视图.通过ref属性传入被继承的视图的外部ID(External identifiers),使用`Xpath`来定位XML元素是最合适的,举例来说,定位到`<field name="is_done">`这个元素可以使用表达式`//field[@name] = 'is_done'`来实现
+`inherit_id` 字段定义了需要被继承的视图.通过 ref 属性传入被继承的视图的外部 ID(External identifiers),使用`Xpath`来定位 XML 元素是最合适的,举例来说,定位到`<field name="is_done">`这个元素可以使用表达式`//field[@name] = 'is_done'`来实现
 
 或是进行缩写,通过`position`属性
 
@@ -199,7 +200,7 @@
   </field>
 ```
 
-**注意** : 当一个字段多次出现在同一个view中,还是需要使用Xpath表达式,因为缩写形式在查找到第一个元素后就停止继续定位了.`position`属性有这几个具体值:
+**注意** : 当一个字段多次出现在同一个 view 中,还是需要使用 Xpath 表达式,因为缩写形式在查找到第一个元素后就停止继续定位了.`position`属性有这几个具体值:
 
 - `after` 添加到匹配节点后
 - `before` 添加到匹配节点前面
@@ -212,14 +213,14 @@
       <attribute name='invisible'>1</attribute>
     </field>
 
-    <!-- 
+    <!--
     这段代码表示把’acitve’这个字段隐藏起来
     实际的开发中,我们使用添加’invisible’这个属性来让字段在页面隐藏而尽量避免使用’replace’,
-    因为’replace’会删除我们定位到的节点(有时候这些节点只是作为一个占位符，当replace删除后会改变整个视图的结构) 
+    因为’replace’会删除我们定位到的节点(有时候这些节点只是作为一个占位符，当replace删除后会改变整个视图的结构)
     -->
   ```
 
-示例: 添加search 视图
+示例: 添加 search 视图
 
 ```xml
   <record id="view_filter_todo_task_inherited" model="ir.ui.view">
@@ -237,60 +238,3 @@
     </field>
   </record>
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
