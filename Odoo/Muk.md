@@ -33,15 +33,21 @@
 
 此为免费补充包(误)
 
-| 名称                         | 描述                                            | 价格   | 地址                                                                                                |
-| ---------------------------- | ----------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| MuK Preview                  | 直接在 Odoo 中预览 文件,为基础模块              | `Free` | [MuK Preview](https://apps.odoo.com/apps/modules/12.0/muk_web_preview/)                             |
-| MuK Preview MS Office        | 直接在 Odoo 中预览 MS Office 文件               | `Free` | [MuK Preview MS Office](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_msoffice/)          |
-| MuK Preview Image            | 直接在 Odoo 中预览 图像文件,支持格式较多,见详情 | `Free` | [MuK Preview Image](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_image/)                 |
-| MuK Preview CSV              | 直接在 Odoo 中预览 csv 文件                     | `Free` | [MuK Preview CSV](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_csv/)                     |
-| MuK Preview Video            | 直接在 Odoo 中预览 视频文件,支持较少格式        | `Free` | [MuK Preview Video](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_video/)                 |
-| MuK Preview Text             | 直接在 Odoo 中预览 文本文件,支持格式丰富        | `Free` | [MuK Preview Text](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_text/)                   |
-| MuK Preview Open Documents   | 直接在 Odoo 中预览 Open Document 文件           | `Free` | [MuK Preview Open Documents](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_opendocument/) |
-| MuK Preview Audio            | 直接在 Odoo 中预览 音频文件                     | `Free` | [MuK Preview Audio](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_audio/)                 |
-| MuK Preview Markdown         | 直接在 Odoo 中预览 Markdown 文件                | `Free` | [MuK Preview Markdown](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_markdown/)           |
+|                         名称 | 描述                                            | 价格   | 地址                                                                                                |
+| ---------------------------: | :---------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
+|                  MuK Preview | 直接在 Odoo 中预览 文件,为基础模块              | `Free` | [MuK Preview](https://apps.odoo.com/apps/modules/12.0/muk_web_preview/)                             |
+|        MuK Preview MS Office | 直接在 Odoo 中预览 MS Office 文件               | `Free` | [MuK Preview MS Office](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_msoffice/)          |
+|            MuK Preview Image | 直接在 Odoo 中预览 图像文件,支持格式较多,见详情 | `Free` | [MuK Preview Image](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_image/)                 |
+|              MuK Preview CSV | 直接在 Odoo 中预览 csv 文件                     | `Free` | [MuK Preview CSV](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_csv/)                     |
+|            MuK Preview Video | 直接在 Odoo 中预览 视频文件,支持较少格式        | `Free` | [MuK Preview Video](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_video/)                 |
+|             MuK Preview Text | 直接在 Odoo 中预览 文本文件,支持格式丰富        | `Free` | [MuK Preview Text](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_text/)                   |
+|   MuK Preview Open Documents | 直接在 Odoo 中预览 Open Document 文件           | `Free` | [MuK Preview Open Documents](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_opendocument/) |
+|            MuK Preview Audio | 直接在 Odoo 中预览 音频文件                     | `Free` | [MuK Preview Audio](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_audio/)                 |
+|         MuK Preview Markdown | 直接在 Odoo 中预览 Markdown 文件                | `Free` | [MuK Preview Markdown](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_markdown/)           |
 | MuK Preview ReStructuredText | 直接在 Odoo 中预览 ReStructuredText 文件        | `Free` | [MuK Preview ReStructuredText](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_rst/)        |
+
+## 可能需要的
+
+|                     名称 | 描述         | 价格       | 地址                                                                                                       |
+| -----------------------: | :----------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
+| MuK QMS Documents Bundle | 质量管理体系 | `195.00 €` | [MuK QMS Documents Bundle](https://apps.odoo.com/apps/modules/12.0/muk_bundle_quality_docs/#resetCollapse) |

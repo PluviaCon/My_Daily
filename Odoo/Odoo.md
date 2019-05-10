@@ -52,6 +52,7 @@
   ```shell
     docker start imagename -a #输出docker信息
     docker exec -u root -it imagename /bin/bash #进入docker 内部
+    #  ['/var/lib/odoo/addons/12.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/odoo/addons']
   ```
 
 ## 模块插件
@@ -283,3 +284,42 @@ user_id 字段代表了来自’res.users’这个模型的用户,它是一个 M
 - 父模型中的一个 many-to-one 字段
 - 重载 create()方法自动创建并设置父级记录
 - 父字段中希望暴露的特定字段的关联字段
+
+### javascript 模块
+
+我所见到的模块化,都是使用`odoo.define` 定义模块,然后里面使用`Widget`来进行操作.可以仔细看一下这篇讲的 odoo[渲染机制](https://qhtao.github.io/2017/04/18/odoo-client-develop).
+
+```js
+odoo.define('muk_web_utils.FormRenderer', function(require) {
+  'use strict'
+
+  var core = require('web.core')
+
+  var FormRenderer = require('web.FormRenderer')
+
+  var _t = core._t
+  var QWeb = core.qweb
+
+  FormRenderer.include({
+    _updateView: function($newContent) {
+      this._super.apply(this, arguments)
+      _.each(
+        this.allFieldWidgets[this.state.id],
+        function(widget) {
+          if (widget.attrs.widget === 'module_boolean') {
+            var inputID = this.idsForLabels[widget.name]
+            var $widgets = this.$('.o_field_widget[name=' + widget.name + ']')
+            var $label = inputID
+              ? this.$('.o_form_label[for=' + inputID + ']')
+              : $()
+            widget.renderWithLabel($label.eq($widgets.index(widget.$el)))
+          }
+        },
+        this
+      )
+    }
+  })
+})
+```
+
+两个参数,第一个为模块名,第二个是接受`require`的方法.通过 `require` 来导入需要的模块，并且显示声明所输出的对象,使用 renturn 关键字实现导出.
