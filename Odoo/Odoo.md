@@ -1,6 +1,6 @@
-# Odoo 应用开发框架过程指南
+# Odoo 应用开发过程指南
 
-根据中文配置[指南](https://alanhou.org/odoo-12-development/)和公司的具体要求来配置,慢慢记录过程
+根据中文[配置指南](https://alanhou.org/odoo-12-development/)来配置,慢慢记录过程
 
 ## 开发环境配置
 
@@ -11,6 +11,8 @@
   sudo docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:10
   sudo docker run -v /www/odoo/addons:/mnt/extra-addons -p 8069:8069 --name odoo --link db:db -t odoo
 
+  # docker run -dit --name ubuntuPP -v ${pwd}:/home  4b540083b58e /bin/bash
+
   docker container stop db
   docker container rm db
   docker container stop odoo
@@ -18,52 +20,51 @@
 
 ```
 
-**注意事项**
+**注意事项 :**
 
-- `psycopg2` 安装问题 :
+> `psycopg2` 安装问题 :
 
-  在 pip3 安装过程中,出现`postgresql-server-dev-X.Y` 错误,[解决方案](http://landcareweb.com/questions/2208/nin-xu-yao-an-zhuang-postgresql-server-dev-x-ylai-gou-jian-fu-wu-qi-duan-kuo-zhan-huo-zhe-an-zhuang-libpq-devlai-gou-jian-ke-hu-duan-ying-yong-cheng-xu)
+在 pip3 安装过程中,出现`postgresql-server-dev-X.Y` 错误,[解决方案](http://landcareweb.com/questions/2208/nin-xu-yao-an-zhuang-postgresql-server-dev-x-ylai-gou-jian-fu-wu-qi-duan-kuo-zhan-huo-zhe-an-zhuang-libpq-devlai-gou-jian-ke-hu-duan-ying-yong-cheng-xu)
 
-- `未安装软件包 libpng12-0` 问题 :
-  先卸载残留,然后下载文件安装,注意版本
+> `未安装软件包 libpng12-0` 问题 :
 
-  ```shell
+先卸载残留,然后下载文件安装,注意版本
 
-    sudo apt --fix-broken install
-    wget http://ftp.cn.debian.org/debian/pool/main/libp/libpng/libpng12-0_1.2.49-1+deb7u2_amd64.deb
+```shell
 
-    sudo apt install ./libpng12-0_1.2.49-1+deb7u2_amd64.deb
+sudo apt --fix-broken install
+wget http://ftp.cn.debian.org/debian/pool/main/libp/libpng/libpng12-0_1.2.49-1+deb7u2_amd64.deb
 
-    sudo dpkg -i wps-office_10.1.0.5672-a21_amd64.deb
+sudo apt install ./libpng12-0_1.2.49-1+deb7u2_amd64.deb
 
-  ```
+sudo dpkg -i wps-office_10.1.0.5672-a21_amd64.deb
 
-- 事实证明,不行上 [Docker](https://hub.docker.com/_/odoo) .....fu\*\*
+```
 
-  ```shell
-    # 安装 PostgreSQL 容器
-    sudo docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:10
-    # 安装 Odoo 服务容器
-    sudo docker run -p 8069:8069 --name odoo --link db:db -t odoo
-  ```
+> 事实证明,不行上 [Docker](https://hub.docker.com/_/odoo) .....fu\*\*
 
-  docker 安装时注意镜像版本号,可以去官网拉去制定版本号安装,并映射目录,也可以在 docker run 之后查看启动命令输出,查看镜像里 odoo 插件的所在目录:
+```shell
+# 安装 PostgreSQL 容器
+sudo docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:10
+# 安装 Odoo 服务容器
+sudo docker run -p 8069:8069 --name odoo --link db:db -t odoo
+```
 
-  ```shell
-    docker start imagename -a #输出docker信息
-    docker exec -u root -it imagename /bin/bash #进入docker 内部
-    #  ['/var/lib/odoo/addons/12.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/odoo/addons']
-  ```
+docker 安装时注意镜像版本号,可以去官网拉去制定版本号安装,并映射目录,也可以在 docker run 之后查看启动命令输出,查看镜像里 odoo 插件的所在目录:
 
-## 模块插件
+```shell
+docker start imagename -a #输出docker信息
+docker exec -u root -it imagename /bin/bash #进入docker 内部
+#  ['/var/lib/odoo/addons/12.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/odoo/addons']
+```
+
+## 模块
 
 ### 安装准备 : [具体详情](https://alanhou.org/odoo12-first-application/)
 
 - 确保操作的目录是 Odoo 的 addons 路径
 
-- 创建模块目录，并包含声明文件
-
-  初始化文件是需配置`__init__.py`来声明所需的模块,并配置`__manifest__.py`文件来描述文件
+- 创建模块目录，并包含声明文件.初始化文件是需配置`__init__.py`来声明所需的模块,并配置`__manifest__.py`文件来描述文件
 
   `__manifest__.py`文件属性 :
 
@@ -137,7 +138,7 @@
 
 #### 原模型继承
 
-拓展模块可以用 python 的类属性 `_inherit`,指定了被扩展的模块.通过 `_inherit` 指定被继承模块后我们新创建的类能获得父类模块的所有功能.因此只要对需要修改的地方进行重构.
+拓展模块(继承)可以用 python 的类属性 `_inherit`,指定了被扩展的模块.通过 `_inherit` 指定被继承模块后我们新创建的类能获得父类模块的所有功能.因此只要对需要修改的地方进行重构.
 
 ```python
   from odoo import models,fields,api
@@ -163,9 +164,11 @@ user_id 字段代表了来自’res.users’这个模型的用户,它是一个 M
     _inherit = 'mail.thread'
 ```
 
-#### view 视图
+#### 视图继承
 
-表单,列表,搜索视图(在 web 端表示为具体页面操作)都是被`arch`所定义的 XML 结构.为了拓展视图,需要修改 xml,具体做法是限定为到要修改的 xml 位置,然后进行插入修改或是完全修改
+表单,列表,搜索视图(在 web 端表示为具体页面操作)都是被`arch`所定义的 XML 结构.为了拓展视图,需要修改 xml,具体做法是限定为到要修改的 xml 位置,然后进行插入修改或是完全修改.
+
+一般来说,开发者模式会提供查看视图的名称和具体的模型,可以在前端界面找到.在引入一个概念--`记录模型`&`外部ID`.
 
 ```xml
 

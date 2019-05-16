@@ -33,8 +33,8 @@
 
 此为免费补充包(误)
 
-|                         名称 | 描述                                            | 价格   | 地址                                                                                                |
-| ---------------------------: | :---------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
+|                         名称 | 描述                                            |  价格  | 地址                                                                                                |
+| ---------------------------: | :---------------------------------------------- | :----: | --------------------------------------------------------------------------------------------------- |
 |                  MuK Preview | 直接在 Odoo 中预览 文件,为基础模块              | `Free` | [MuK Preview](https://apps.odoo.com/apps/modules/12.0/muk_web_preview/)                             |
 |        MuK Preview MS Office | 直接在 Odoo 中预览 MS Office 文件               | `Free` | [MuK Preview MS Office](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_msoffice/)          |
 |            MuK Preview Image | 直接在 Odoo 中预览 图像文件,支持格式较多,见详情 | `Free` | [MuK Preview Image](https://apps.odoo.com/apps/modules/12.0/muk_web_preview_image/)                 |
@@ -48,6 +48,17 @@
 
 ## 可能需要的
 
-|                     名称 | 描述         | 价格       | 地址                                                                                                       |
-| -----------------------: | :----------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
-| MuK QMS Documents Bundle | 质量管理体系 | `195.00 €` | [MuK QMS Documents Bundle](https://apps.odoo.com/apps/modules/12.0/muk_bundle_quality_docs/#resetCollapse) |
+### 基于[ISO 9000](https://zh.wikipedia.org/wiki/ISO_9000)标准的质量管理系统
+
+|                              名称 | 描述                              |    价格    | 地址                                                                                                       |
+| --------------------------------: | :-------------------------------- | :--------: | ---------------------------------------------------------------------------------------------------------- |
+|          MuK QMS Documents Bundle | 质量管理文档(全)                  | `195.00 €` | [MuK QMS Documents Bundle](https://apps.odoo.com/apps/modules/12.0/muk_bundle_quality_docs/#resetCollapse) |
+|                 MuK QMS Documents | 文档基础模块,简单功能             |   `Free`   | [MuK QMS Documents](https://apps.odoo.com/apps/modules/12.0/muk_quality_docs/)                             |
+|     MuK QMS Documents DMS Support | 文档附件预览功能,需要付费功能查看 |   `Free`   | [MuK QMS Documents DMS Support](https://apps.odoo.com/apps/modules/12.0/muk_quality_docs_dms/)             |
+| MuK QMS Documents Human Resources | 人力资源功能                      |   `Free`   | [MuK QMS Documents Human Resources](https://apps.odoo.com/apps/modules/12.0/muk_quality_docs_hr/)          |
+
+### 会计&金融相关
+
+|                       名称 | 描述           |  价格  | 地址                                                                                                        |
+| -------------------------: | :------------- | :----: | ----------------------------------------------------------------------------------------------------------- |
+| MuK Accounting and Finance | 会计相关的拓展 | `Free` | [MuK Accounting and Finance](https://apps.odoo.com/apps/modules/12.0/muk_account_accountant/#resetCollapse) |
