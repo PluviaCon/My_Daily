@@ -11,15 +11,18 @@
   - [Shell](#shell)
     - [常用命令](#常用命令)
     - [系统类](#系统类)
-      - [**外部命令&内部命令**](#外部命令内部命令)
-      - [**环境变量**](#环境变量)
-      - [**文件权限**](#文件权限)
+      - [外部命令&内部命令](#外部命令内部命令)
+      - [环境变量](#环境变量)
+      - [文件权限](#文件权限)
+        - [Linux 文件权限码](#linux-文件权限码)
+        - [修改权限](#修改权限)
+        - [改变所属关系](#改变所属关系)
     - [shell 基础](#shell-基础)
-      - [**重新定向输入和输出**](#重新定向输入和输出)
-      - [**结构化命令**](#结构化命令)
+      - [重新定向输入和输出](#重新定向输入和输出)
+      - [结构化命令](#结构化命令)
   - [构造函数&原型对象](#构造函数原型对象)
-    - [constructor **_属性_**](#constructor-_属性_)
-    - [prototype **_属性_**](#prototype-_属性_)
+    - [constructor 属性](#constructor-属性)
+    - [prototype 属性](#prototype-属性)
     - [ES6 class](#es6-class)
     - [变量值类型](#变量值类型)
   - [Meteor](#meteor)
@@ -36,10 +39,11 @@
     - [Jitsi Meet 安装](#jitsi-meet-安装)
   - [Kubernetes && Docker](#kubernetes--docker)
     - [Kubernetes 中文文档 模型文档](#kubernetes-中文文档-模型文档)
-    - [安装示例&注意事项](#安装示例注意事项)
-      - [常用](#常用)
-      - [单节点](#单节点)
-      - [多节点高可用](#多节点高可用)
+      - [安装示例&注意事项](#安装示例注意事项)
+        - [常用](#常用)
+        - [单节点](#单节点)
+        - [多节点高可用](#多节点高可用)
+    - [Docker](#docker)
   - [Redis](#redis)
     - [安装(Ubuntu18.0.4)](#安装ubuntu1804)
     - [命令(String 类型)](#命令string-类型)
@@ -194,7 +198,8 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
         })(
           <Select
             // disabled={this.state.showText}
-            onChange={this.handleSelectChange}>
+            onChange={this.handleSelectChange}
+          >
             {options}
           </Select>
         )}
@@ -203,7 +208,12 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
         {getFieldDecorator('Details', {
           initialValue: this.state.nowtextcont,
           rules: [{ required: true, message: '请填写详情内容' }]
-        })(<TextArea disabled={this.state.showText} autosize={{ minRows: 2, maxRows: 6 }} />)}
+        })(
+          <TextArea
+            disabled={this.state.showText}
+            autosize={{ minRows: 2, maxRows: 6 }}
+          />
+        )}
       </FormItem>
       <FormItem wrapperCol={{ span: 12, offset: 8 }}>
         <Button type="primary" htmlType="submit">
@@ -315,7 +325,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
   #通过jobs查看后台运行的进程,或是jobs -l
 ```
 
-#### **外部命令&内部命令**
+#### 外部命令&内部命令
 
 内建命令和非内建命令的操作方式大不相同
 
@@ -327,7 +337,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 **内建命令** 内建命令和外部命令的区别在于前者不需要使用子进程来执行. 它们已经和 shell 编译成了一
 体,作为 shell 工具的组成部分存在,不需要借助外部程序文件来运行
 
-#### **环境变量**
+#### 环境变量
 
 `环境变量(environment variable)` 用来存储有关 shell 会话和工作环境的信息,也可以用来存储持久数据,以便程序或脚本可以很快访问,一般是路径.分为,`全局变量` 和 `局部变量`
 
@@ -372,7 +382,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 环境变量持久化,最好是在`/etc/profile.d`目录中创建一个以`.sh`结尾的文件. 把所有新的或修改过的全局环境变
 量设置放在这个文件中.在大多数发行版中,存储个人用户永久性 bash shell 变量的地方是`$HOME/.bashrc`文件. 这一点适用于所有类型的 shell 进程. 但如果设置了`BASH_ENV` 变量,那么记住,除非它指向的是`$HOME/.bashrc`,否则你应该将非交互式 shell 的用户变量放在别的地方.
 
-#### **文件权限**
+#### 文件权限
 
 使用`ls -l` 查看目录或文件的权限信息
 
@@ -387,25 +397,25 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 `-rw-rw-r--` 就代表.从第二个字段开始,`rw-` 文件属主(用户)权限为可读写,`rw-` 代表属组成员的权限为可读写,`r--` 代表其他用户的权限为只可读
 
-**Linux 文件权限码**
+##### Linux 文件权限码
 
-| 权限  | 二进制值 | 八进制值 | 描述             |
-| :---: | :------: | :------: | :--------------- |
-|  ---  |   000    |    0     | 没有任何权限     |
-|  --x  |   001    |    1     | 只有执行权限     |
-|  -w-  |   010    |    2     | 只有写入权限     |
-|  -wx  |   011    |    3     | 有写入和执行权限 |
-|  r--  |   100    |    4     | 只有读取权限     |
-|  r-x  |   101    |    5     | 有读取和执行权限 |
-|  rw-  |   110    |    6     | 有读取和写入权限 |
-|  rwx  |   111    |    7     | 有全部权限       |
+| 权限 | 二进制值 | 八进制值 | 描述             |
+| :--: | :------: | :------: | :--------------- |
+| ---  |   000    |    0     | 没有任何权限     |
+| --x  |   001    |    1     | 只有执行权限     |
+| -w-  |   010    |    2     | 只有写入权限     |
+| -wx  |   011    |    3     | 有写入和执行权限 |
+| r--  |   100    |    4     | 只有读取权限     |
+| r-x  |   101    |    5     | 有读取和执行权限 |
+| rw-  |   110    |    6     | 有读取和写入权限 |
+| rwx  |   111    |    7     | 有全部权限       |
 
-**修改权限**
+##### 修改权限
 
 `chmod` 命令用来改变文件和目录的安全性设置,可以用八进制模式或符号模式修改
 `chmod options mode file` `[ugoa...][[+-=][rwxXstugo...]`
 
-**改变所属关系**
+##### 改变所属关系
 
 `chown` 命令用来改变文件的属主, `chgrp` 命令用来改变文件的默认属组
 
@@ -417,7 +427,7 @@ shell 脚本会处理第一行注释,`#` 号后的`!`会告诉 shell 用哪个 s
 
 shell 脚本中定义的变量会一直保持着它们的值,但在 shell 脚本结束时会被删除掉
 
-#### **重新定向输入和输出**
+#### 重新定向输入和输出
 
 bash shell 提供了几个操作符,可以将命令的输出重定向到另一个位置(比如文件). 重定向可以用于输入,也可以用于输出,可以将文件重定向到命令输入
 
@@ -429,7 +439,7 @@ bash shell 提供了几个操作符,可以将命令的输出重定向到另一�
 **管道**
 `|` 将一个命令的输出作为另一个命令的输入
 
-#### **结构化命令**
+#### 结构化命令
 
 对逻辑流程控制,改变程序的执行顺序,一般是`if then` 或者是`case`
 
@@ -473,7 +483,7 @@ IFS=\$'\n':;"
 
 > 原型是一个对象，任何一个对象都可以成为原型，并让其他对象继承
 
-### constructor **_属性_**
+### constructor 属性
 
 属性始终指向创建当前对象的构造函数
 
@@ -495,7 +505,7 @@ var a = new A()
 console.log(a.constructor) //输出 function A(){}
 ```
 
-### prototype **_属性_**
+### prototype 属性
 
 prototype 属性是每个`函数对象`(**`function`**) 都有的属性，被称为**原型对象**，`_proto_` 属性是每个对象都有的属性，是指向该原型对象的内部指针.
 
@@ -721,9 +731,11 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
   ```
 
 - `Template instances` 获取模板实例,还可给模板实例附加属性,属性在模板响应式更新中保持,不会丢失
+
   - 在 created, rendered 和 destroyed 模板回调中，`this`指向模板实例
   - 事件处理器的第二个参数
   - 在 Helper 中,通过`Template.instance()` 获取
+
   ```js
   Template.appInstall.helpers({
     isInstalling() {
@@ -734,6 +746,7 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
     }
   })
   ```
+
 - `Template.myTemplate.onCreated()` 模板初始时调用方法,设定初始值,参数是要执行的方法
 
   ```js
@@ -814,7 +827,10 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
       this.logs = new ReactiveVar([])
 
       const id = this.id.get()
-      Promise.all([RocketChat.API.get(`apps/${id}`), RocketChat.API.get(`apps/${id}/logs`)])
+      Promise.all([
+        RocketChat.API.get(`apps/${id}`),
+        RocketChat.API.get(`apps/${id}/logs`)
+      ])
         .then(results => {
           instance.app.set(results[0].app)
           instance.logs.set(results[1].logs)
@@ -830,11 +846,13 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 
 - [Blaze API](http://blazejs.org/api/blaze.html)
   Blaze 是 Meteor 預設的前端框架,整合了 Meteor 的 Tracker 和 Minimongo，能夠隨著資料變動而自動更新使用者畫面，因此開發者不需要決定什麼時候去更新網頁元素，也不需要做 data-binding,常用:
+
   - `Blaze.render（templateOrView，parentNode，[nextNode]，[parentView]）`
     将模板渲染到指定节点 ,`templateOrView` 为模板或 view 对象, `parentNode` 为呈现模板的父节点,必须是 Element 节点
   - `Blaze.renderWithData（templateOrView，data，parentNode，[nextNode]，[parentView]）`
     将数据和模板绑定,插入到节点. `data`为数据,若无此参数,和`render`基本相同
   - `Blaze.remove（renderedView）` 从 DOM 中删除节点,然后停止跟踪和更新节点
+
     ```js
     var myData3 = Blaze.render(myData, myData2)
     // 3s后删除数据
@@ -844,8 +862,9 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
     //OR
     Blaze.remove(Blaze.getView(document.getElementsByClassName('Test')[0]))
     ```
-  - `Blaze.getData（[elementOrView]）` 返回当前数据,`elementOrView` 为渲染的元素
-  - `Blaze.toHTMLWithData（templateOrView，data）` 将模板渲染成 HTML,`templateOrView` 为用于生成 HTML 的模板,`data`为关联数据
+
+- `Blaze.getData（[elementOrView]）` 返回当前数据,`elementOrView` 为渲染的元素
+- `Blaze.toHTMLWithData（templateOrView，data）` 将模板渲染成 HTML,`templateOrView` 为用于生成 HTML 的模板,`data`为关联数据
 
 ### [Collection 数据集合](https://wizardforcel.gitbooks.io/meteor-doc/content/12.html)
 
@@ -924,19 +943,21 @@ if (Meteor.isClient) {
     ```
 
   - `Cursor.map(callback,[thisArg])` 匹配每一个文档对象,通过 callback 参数指定的 映射函数 返回一个新值
+
     ```js
     var tels = demo.find({ name: 'Jason' }).map(function(doc) {
       return doc.tel
     })
     ```
+
   - `Cursor.fetch()` 提取游标匹配的所有文档,返回这些文档组成的数组
+
     ```js
     var demo = new Mongo.Collection('persons')
     var persons = demo.find().fetch()
     ```
-  - `Cursor.count()` 返回游标匹配的文档数量
 
-  <br>
+  - `Cursor.count()` 返回游标匹配的文档数量
 
 - `update(selector, modifier, [options], [callback])` 更新集合中指定文档.
   `selector` 指文档选择符,文档\_id 或者是合法的 MongoDB 选择器.`modifier` 指文档修改指令对象,根据这个指令修改匹配的数据.`options` 可选,JSON 对象,`callback` 完成之后的回调,在后端调用该方法时，如果不指定`callback`参数，将阻塞执行直至更新完成，或者在发生 错误时抛出异常；前端不支持同步阻塞方式的执行，因此如果不设置`callback`参数，将 无法捕捉错误和执行结果
@@ -1176,9 +1197,9 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
 - `Service` [抽象定义](https://kubernetes.io/zh/docs/concepts/services-networking/service/),一个 Pod 的逻辑分组，一种可以访问它们的策略 —— 通常称为微服务. 这一组 Pod 能够被 Service 访问到，通常是通过 Label Selector（查看下面了解，为什么可能需要没有 selector 的 Service）实现的
 
-### 安装示例&注意事项
+#### 安装示例&注意事项
 
-#### 常用
+##### 常用
 
 - [终端颜色](https://xmyunwei.com/1794.html),一片白很不爽...
 - VirtualBox 在安装 `centos 7` 时,默认无法访问外部,改一下[网卡设置](https://blog.csdn.net/fuguangruomeng/article/details/79244055)
@@ -1224,7 +1245,7 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
   ```
 
-#### 单节点
+##### 单节点
 
 - 大坑!!! 配置镜像时,选择一个配置方式,1.12 以上是,如果配置 json 文件无用,选择以下方式配置
   [修改 docker.service](http://shouce.jb51.net/docker_practice/install/mirror.html),[修改 docker.service2](https://www.jianshu.com/p/42772740f09a)
@@ -1281,7 +1302,7 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
   ```
 
-#### 多节点高可用
+##### 多节点高可用
 
 了解[Ansible](https://getansible.com/begin/an_zhuang_ansile),对多节点配置一般都是通过 Ansible 写配置然后一键生成,这里是他的[参数文档](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html?highlight=when)和[视频资料](https://www.bilibili.com/video/av25424954/).
 
@@ -1320,37 +1341,37 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
 
   <small>_这里需要注意上一步的是修改 kus 的下载地址_ </small>
 
-  通过 \$http_proxy 来获取你的代理地址,添加到访问出错的任务列表里
+通过 \$http_proxy 来获取你的代理地址,添加到访问出错的任务列表里
 
-  在上述路径里,添加代理字段 `http_proxy`
+在上述路径里,添加代理字段 `http_proxy`
 
-  ```shell
+```shell
 
-  - name: Update package management cache (YUM)
-    yum:
-      update_cache: yes
-      name: '*'
-    environment:
-      http_proxy: http://10.0.0.1:3333(例子)
-    register: yum_task_result
-    until: yum_task_result is succeeded
-    retries: 4
-    ...
+- name: Update package management cache (YUM)
+  yum:
+    update_cache: yes
+    name: '*'
+  environment:
+    http_proxy: http://10.0.0.1:3333(例子)
+  register: yum_task_result
+  until: yum_task_result is succeeded
+  retries: 4
+  ...
 
-  ```
+```
 
-  ```shell
-    # Download URLs
-    # kubeadm_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubeadm_version }}/bin/linux/{{ image_arch }}/kubeadm"
-    kubeadm_download_url: "http://10.0.1.1/kubeadm"
-    # hyperkube_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kube_version }}/bin/linux/{{ image_arch }}/hyperkube"
-    hyperkube_download_url: "http://10.0.1.1/hyperkube"
-    # etcd_download_url: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-{{ image_arch }}.tar.gz"
-    etcd_download_url: "http://10.0.1.1/etcd-{{ etcd_version }}-linux-{{ image_arch }}.tar.gz"
-    # cni_download_url: "https://github.com/containernetworking/plugins/releases/download/{{ cni_version }}/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
-    cni_download_url: "http://10.0.1.1/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
+```shell
+  # Download URLs
+  # kubeadm_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubeadm_version }}/bin/linux/{{ image_arch }}/kubeadm"
+  kubeadm_download_url: "http://10.0.1.1/kubeadm"
+  # hyperkube_download_url: "https://storage.googleapis.com/kubernetes-release/release/{{ kube_version }}/bin/linux/{{ image_arch }}/hyperkube"
+  hyperkube_download_url: "http://10.0.1.1/hyperkube"
+  # etcd_download_url: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-{{ image_arch }}.tar.gz"
+  etcd_download_url: "http://10.0.1.1/etcd-{{ etcd_version }}-linux-{{ image_arch }}.tar.gz"
+  # cni_download_url: "https://github.com/containernetworking/plugins/releases/download/{{ cni_version }}/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
+  cni_download_url: "http://10.0.1.1/cni-plugins-{{ image_arch }}-{{ cni_version }}.tgz"
 
-  ```
+```
 
 - 在配置成功后 ,添加 node 节点成功但是显示 `NotReady` :
   网络插件问题,可以查看 node 节点信息看到 `kubectl describe node [nodename]`
@@ -1379,6 +1400,27 @@ Kubernetes 集群包含一个 master 和多个 node;Master 是控制集群的中
   ...(太多忘了存)
 
 还有一些常用的 sh 命令,在另一个文件里
+
+### Docker
+
+Docker 在 winods 平台下安装,需要注意开启虚拟化,注意网络畅通(墙);在 Linux 下,配置正确即可,相对容易.
+常用命令只有几个,但是要注意容器之间的通信,虽然变得很容易(几个命令),但是相应的网络也变得复杂许多.对于 windows 端,docker 不需要配置环境就能用很多服务真的很爽.下面是常用命令:
+
+```shell
+  docker run ...
+  docker ps ...
+  docker exec ...
+  docker commit ...
+  docker pull ...
+```
+
+常用就是这些,后面有很多参数可以查找.可以看一下[入门指导](https://yeasy.gitbooks.io/docker_practice/introduction/what.html),很有意思.
+
+查询命令主要是这几个网站:
+
+- [Docker 官网](https://docs.docker.com/glossary/)
+- [DockerLinux 命令](http://linux.51yip.com/search/docker)
+- 谷歌就好了
 
 ## Redis
 
@@ -1572,29 +1614,29 @@ Java 语言提供了八种基本类型，其中包括六种数字类型（四种
   生成器函数（generator function）和生成器（generator）: 生成器函数是一种特殊的函数；生成器则是特殊的迭代器
 
   ```Python
-      def func():
-      return 1
+    def func():
+    return 1
 
-      def gen():
-      yield 1
+    def gen():
+    yield 1
   ```
 
   除了返回值不相同,和普通函数没有太大区别.func() 是一个 int 类型的对象；而 gen() 则是一个迭代器对象.
   当函数内遇到 yield 关键字后,将返回生成器对象,变量保存(暂存),直到下一次迭代调用时,从之前暂存位置开始读取
 
   ```Python
-      >>> f = fab(5)
-      >>> f.next()
-      1
-      >>> f.next()
-      1
-      >>> f.next()
-      2
-      >>> f.next()
-      3
-      >>> f.next()
-      5
-      >>> f.next()
+    >>> f = fab(5)
+    >>> f.next()
+    1
+    >>> f.next()
+    1
+    >>> f.next()
+    2
+    >>> f.next()
+    3
+    >>> f.next()
+    5
+    >>> f.next()
   ```
 
   参考: [(译)Python 关键字 yield 的解释(stackoverflow)](https://pyzh.readthedocs.io/en/latest/the-python-yield-keyword-explained.html),[理解 yield 关键字](https://liam.page/2017/06/30/understanding-yield-in-python/)

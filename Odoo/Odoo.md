@@ -1,5 +1,7 @@
 # Odoo 应用开发过程指南
 
+[TOC]
+
 根据中文[配置指南](https://alanhou.org/odoo-12-development/)来配置,慢慢记录过程
 
 ## 开发环境配置
@@ -57,6 +59,8 @@ docker start imagename -a #输出docker信息
 docker exec -u root -it imagename /bin/bash #进入docker 内部
 #  ['/var/lib/odoo/addons/12.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/odoo/addons']
 ```
+
+如果遇见 Windos 下 Docker 和虚拟机启动冲突无法打开时,先关闭 Hyper-V,然后在开启就 OK 了.
 
 ## 模块
 
@@ -326,3 +330,25 @@ odoo.define('muk_web_utils.FormRenderer', function(require) {
 ```
 
 两个参数,第一个为模块名,第二个是接受`require`的方法.通过 `require` 来导入需要的模块，并且显示声明所输出的对象,使用 renturn 关键字实现导出.
+
+在开发时,使用`assets 开发者模式`进行实时查看更好,记得保持网络畅通(访问`https://apps.odoo.com`的畅通).
+
+### 其他安装
+
+#### wine 安装过程
+
+[安装过程(源码安装)](https://www.tecmint.com/install-wine-in-rhel-centos-and-fedora/),CentOS7 系统下安装.
+注意不要使用 root 用户安装,风险官网有提示.
+
+##### 问题
+
+在 64 位系统下安装成功 64 位,可是运行 32 位程序时报错.换成 32 位 wine 实验.卸载方法: [官方卸载](https://wiki.winehq.org/FAQ#How_do_I_uninstall_Wine.3F)
+
+在安装 32 位过程中,一直提示依赖减少,第一个安装以下依赖解决:
+
+```shell
+  sudo yum install xulrunner.i686
+  sudo yum install ia32-libs.i686
+  sudo yum install libX11-devel.i686
+  ./configure --without-freetype
+```
