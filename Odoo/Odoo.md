@@ -9,17 +9,35 @@
 安装示例有很详细的过程,开发是 Ubuntu 系统,所以选择这个来配置---- [Ubuntu 快速安装配置 Odoo 12](https://alanhou.org/odoo-12/)
 
 ```shell
-
+  # 创建容器
   sudo docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:10
   sudo docker run -v /www/odoo/addons:/mnt/extra-addons -p 8069:8069 --name odoo --link db:db -t odoo
+  sudo docker run -p 90:80 -d -it -v D:\Ubuntu:/home --link odoo:odoo --name nginxoo pluviacon/nginx:latest
+  sudo docker run --name webviewer-server -p 8090:8090 -e INCLUDE_DEMO='true' pdftron/webviewer-server:latest
 
   # docker run -dit --name ubuntuPP -v ${pwd}:/home  4b540083b58e /bin/bash
 
+  # 删除容器
   docker container stop db
   docker container rm db
   docker container stop odoo
   docker container rm odoo
 
+  # 提交容器镜像
+  docker commit -a "" -m "" imagesid imagesname:tag
+  docker push youname/imagesname:tag
+
+```
+
+安装过程中,网络问题是个很烦的问题.所以[简单来看](https://segmentfault.com/a/1190000016896628),来使用`--link`参数进行连接容器,但在使用过程中发现,想要多个连接容器,`--link`参数显然不够用,使用docker的`--network`参数创建网络,然后指定容器加入网络即可进行通信.
+
+```shell
+  # 查看docker网络
+  docker network ls
+  # 查看某一网络
+  docker network inspect networkname
+  # 某一容器加入某一网络
+  docker network connect networkname imagename
 ```
 
 **注意事项 :**
@@ -27,6 +45,12 @@
 > `psycopg2` 安装问题 :
 
 在 pip3 安装过程中,出现`postgresql-server-dev-X.Y` 错误,[解决方案](http://landcareweb.com/questions/2208/nin-xu-yao-an-zhuang-postgresql-server-dev-x-ylai-gou-jian-fu-wu-qi-duan-kuo-zhan-huo-zhe-an-zhuang-libpq-devlai-gou-jian-ke-hu-duan-ying-yong-cheng-xu)
+
+```shell
+  sudo apt-get install postgresql
+  sudo apt-get install python-psycopg2
+  sudo apt-get install libpq-dev
+```
 
 > `未安装软件包 libpng12-0` 问题 :
 
@@ -352,3 +376,11 @@ odoo.define('muk_web_utils.FormRenderer', function(require) {
   sudo yum install libX11-devel.i686
   ./configure --without-freetype
 ```
+
+#### 方向
+
+- odoo插件修改，继承预览模块
+- pdfserver请求(完蛋)
+- 集成时预览中文问题
+
+npm start key="demo:emmm@yopmail.com:7458c53d018b01d1a026e5242a3fca76c3cb183b492e3acc19"
