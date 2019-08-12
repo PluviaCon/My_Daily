@@ -1438,7 +1438,9 @@ Docker 在 winods 平台下安装,需要注意开启虚拟化,注意网络畅通
 - `CMD` 和`ENTRYPOINT`相同,区别在于,可以被`docker run` 提供的参数覆盖掉.`ENTRYPOINT`命令只要是用来指定默认的执行命令.
 - `ENV` 在镜像内设置环境变量,可以在启动容器重置.
 
-对于构建容器,常用的是`docker build -f dockerfile -t demo/0.1`
+对于构建容器,常用的是`docker build -f dockerfile -t demo/0.1` . 有个不错的dockerfile文件,挺有意思,可以学习一下.
+[https://github.com/jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles)
+
 
 ## Redis
 
