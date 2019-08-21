@@ -22,6 +22,7 @@
     - [prototype **_属性_**](#prototype-_属性_)
     - [ES6 class](#es6-class)
     - [变量值类型](#变量值类型)
+  - [React渲染&优化](#react渲染优化)
   - [Meteor](#meteor)
     - [RocketChat API](#rocketchat-api)
     - [目录结构](#目录结构)
@@ -590,6 +591,18 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
     return o
   }
   ```
+
+## React渲染&优化
+
+在React16版本之后,生命周期更新了静态方法[getDerivedStateFromProps](https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops),主要是解决异步渲染问题,分为`比较阶段`和`更新阶段`.
+
+由于React在更新节点时,如果父节点改变,子节点也会相应改变(diff算法),所以标识子节点使得组件在比较时更快找出改变的节点,加入Key可以使这一过程更容易.所以性能优化上,主要集中在一下几点:
+
+- 避免没有必要的卸载和更新
+- 保持标签和DOM结构的稳定性
+- 避免重复渲染,可以使用`shouldComponentUpdate`生命周期来对比有无变化的`props`和`state`来避免组件更新,对于基本类型和引用类型的不同所带来的`shouldComponentUpdate`周期无效的情况,可以看一下[immutable](https://immutable-js.github.io/immutable-js/)的使用.
+- 分离组件,尽量避免父组件的更新.
+  比如,一个父组件里有循环出来的子组件,在更新state改变子组件数量或者值的时候,可以把改变的过程放在子组件完成或者是在父组件时将改变后的数据赋值给一个变量传入子组件中
 
 ## Meteor
 
