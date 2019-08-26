@@ -105,6 +105,9 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
   > 通过 git status 查看仓库的状态
   > 确认提交分支正确,然后备注本次修改内容,然后提交(push)
   > 若遇到 elline 语法问题 ,尝试 git commit --no-verify -m "修改"
+  >git log 查看版本
+  >git reset --hard HEAD^ 本地仓库回到指定仓库
+  >git push -f 覆盖远程仓库版本(撤销操作)
 
 - 启动 java 时注意端口有无被占用,[查看进程](https://blog.csdn.net/hongweideng/article/details/78424866)
 - ESlint 语法规则问题，[官网](https://eslint.org/)大多有解释,补充：
