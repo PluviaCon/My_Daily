@@ -607,6 +607,8 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 - 分离组件,尽量避免父组件的更新.
   比如,一个父组件里有循环出来的子组件,在更新state改变子组件数量或者值的时候,可以把改变的过程放在子组件完成或者是在父组件时将改变后的数据赋值给一个变量传入子组件中
 
+video：[从React渲染原理看性能优化@黄琼_React CN 2018](https://www.youtube.com/watch?v=Go3BseQ1VZQ)
+
 ## Meteor
 
 在 Ubuntu 或是 Win 环境安装时,按照[官网](https://www.meteor.com/install)操作即可.
