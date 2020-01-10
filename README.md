@@ -3,7 +3,7 @@
 
 # ubuntu 脱坑 & 日常
 
-- [ubuntu 脱坑 & 日常](#ubuntu-脱坑--日常)
+- [ubuntu 脱坑 &amp; 日常](#ubuntu-脱坑-amp-日常)
   - [系统安装](#系统安装)
   - [常用软件](#常用软件)
   - [环境](#环境)
@@ -11,18 +11,18 @@
   - [Shell](#shell)
     - [常用命令](#常用命令)
     - [系统类](#系统类)
-      - [**外部命令&内部命令**](#外部命令内部命令)
-      - [**环境变量**](#环境变量)
-      - [**文件权限**](#文件权限)
+      - [外部命令&amp;内部命令](#外部命令amp内部命令)
+      - [环境变量](#环境变量)
+      - [文件权限](#文件权限)
     - [shell 基础](#shell-基础)
-      - [**重新定向输入和输出**](#重新定向输入和输出)
-      - [**结构化命令**](#结构化命令)
-  - [构造函数&原型对象](#构造函数原型对象)
-    - [constructor **_属性_**](#constructor-_属性_)
-    - [prototype **_属性_**](#prototype-_属性_)
+      - [重新定向输入和输出](#重新定向输入和输出)
+      - [结构化命令](#结构化命令)
+  - [构造函数&amp;原型对象](#构造函数amp原型对象)
+    - [constructor 属性](#constructor-属性)
+    - [prototype 属性](#prototype-属性)
     - [ES6 class](#es6-class)
     - [变量值类型](#变量值类型)
-  - [React渲染&优化](#react渲染优化)
+  - [React渲染&amp;优化](#react渲染amp优化)
   - [Meteor](#meteor)
     - [RocketChat API](#rocketchat-api)
     - [目录结构](#目录结构)
@@ -31,13 +31,13 @@
     - [Collection 数据集合](#collection-数据集合)
     - [Methods RPC 协议实现方法](#methods-rpc-协议实现方法)
     - [Meteor Package](#meteor-package)
-  - [Nginx & certbot & Jitsi Meet](#nginx--certbot--jitsi-meet)
+  - [Nginx &amp; certbot &amp; Jitsi Meet](#nginx-amp-certbot-amp-jitsi-meet)
     - [HTTP 和反向代理服务器](#http-和反向代理服务器)
     - [SSL 简化申请流程](#ssl-简化申请流程)
     - [Jitsi Meet 安装](#jitsi-meet-安装)
-  - [Kubernetes && Docker](#kubernetes--docker)
+  - [Kubernetes &amp;&amp; Docker](#kubernetes-ampamp-docker)
     - [Kubernetes 中文文档 模型文档](#kubernetes-中文文档-模型文档)
-    - [安装示例&注意事项](#安装示例注意事项)
+    - [安装示例&amp;注意事项](#安装示例amp注意事项)
       - [常用](#常用)
       - [单节点](#单节点)
       - [多节点高可用](#多节点高可用)
@@ -48,7 +48,7 @@
   - [Java](#java)
     - [关键字](#关键字)
     - [识别符](#识别符)
-    - [数据类型&变量](#数据类型变量)
+    - [数据类型&amp;变量](#数据类型amp变量)
       - [声明变量](#声明变量)
       - [基本数据类型](#基本数据类型)
       - [数组](#数组)
@@ -606,6 +606,8 @@ javascript 变量是松散类型变量,意味着可以给变量赋值任意类�
 - 避免重复渲染,可以使用`shouldComponentUpdate`生命周期来对比有无变化的`props`和`state`来避免组件更新,对于基本类型和引用类型的不同所带来的`shouldComponentUpdate`周期无效的情况,可以看一下[immutable](https://immutable-js.github.io/immutable-js/)的使用.
 - 分离组件,尽量避免父组件的更新.
   比如,一个父组件里有循环出来的子组件,在更新state改变子组件数量或者值的时候,可以把改变的过程放在子组件完成或者是在父组件时将改变后的数据赋值给一个变量传入子组件中
+
+  [文章](https://www.my-fe.pub/post/front-end-performance-optimization-notes.html)
 
 ## Meteor
 
